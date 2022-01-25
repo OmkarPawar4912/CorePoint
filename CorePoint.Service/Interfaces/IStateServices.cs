@@ -1,8 +1,6 @@
 ﻿using CorePoint.DAL.Models;
 using CorePoint.Service.ViewModel;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace CorePoint.Service.Interfaces
 {
@@ -10,7 +8,7 @@ namespace CorePoint.Service.Interfaces
     {
         void CreateState(State state);
         void Delete(int? id);
-        void EditCountry(State state);
+        void EditState(State state);
         ViewModelState GetDetailsById(int? id);
         IEnumerable<ViewModelState> GetList();
         bool StateExists(int id);

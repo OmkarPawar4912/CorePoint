@@ -1,41 +1,36 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using CorePoint.DAL.Models;
+using CorePoint.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using CorePoint.DAL.Data;
-using CorePoint.DAL.Models;
+using System.Linq;
 
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CitiesController : Controller
     {
-        private readonly ApplicationContext _context;
+        private readonly ICityServices _cityServices;
 
-        public CitiesController(ApplicationContext context)
+        public CitiesController(ICityServices cityServices)
         {
-            _context = context;
+            _cityServices = cityServices;
         }
 
         // GET: Admin/Cities
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Cities.ToListAsync());
+            return View(_cityServices.GetList().ToList());
         }
 
         // GET: Admin/Cities/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var city = _cityServices.GetDetailsById(id);
             if (city == null)
             {
                 return NotFound();
@@ -55,26 +50,25 @@ namespace CorePoint.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,StateId")] City city)
+        public IActionResult Create([Bind("Id,Name,StateId")] City city)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(city);
-                await _context.SaveChangesAsync();
+                _cityServices.CreateCity(city);
                 return RedirectToAction(nameof(Index));
             }
             return View(city);
         }
 
         // GET: Admin/Cities/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.Cities.FindAsync(id);
+            var city = _cityServices.GetDetailsById(id);
             if (city == null)
             {
                 return NotFound();
@@ -87,7 +81,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,StateId")] City city)
+        public IActionResult Edit(int id, [Bind("Id,Name,StateId")] City city)
         {
             if (id != city.Id)
             {
@@ -98,12 +92,11 @@ namespace CorePoint.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(city);
-                    await _context.SaveChangesAsync();
+                    _cityServices.EditCity(city);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CityExists(city.Id))
+                    if (!_cityServices.CityExists(city.Id))
                     {
                         return NotFound();
                     }
@@ -118,15 +111,14 @@ namespace CorePoint.Areas.Admin.Controllers
         }
 
         // GET: Admin/Cities/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var city = await _context.Cities
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var city = _cityServices.GetDetailsById(id);
             if (city == null)
             {
                 return NotFound();
@@ -138,17 +130,10 @@ namespace CorePoint.Areas.Admin.Controllers
         // POST: Admin/Cities/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var city = await _context.Cities.FindAsync(id);
-            _context.Cities.Remove(city);
-            await _context.SaveChangesAsync();
+            _cityServices.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CityExists(int id)
-        {
-            return _context.Cities.Any(e => e.Id == id);
         }
     }
 }

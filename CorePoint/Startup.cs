@@ -28,6 +28,7 @@ namespace CorePoint
             services.AddScoped<ICountryServices, CountryServices>();
             services.AddScoped<IAccountServices, AccountServices>();
             services.AddScoped<IStateServices, StateServices>();
+            services.AddScoped<ICityServices, CityServices>();
             services.AddControllersWithViews();
         }
 

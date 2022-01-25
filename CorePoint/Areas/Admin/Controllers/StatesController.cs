@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CorePoint.DAL.Models;
+using CorePoint.Service.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CorePoint.DAL.Data;
-using CorePoint.DAL.Models;
-using CorePoint.Service.Interfaces;
 
 namespace CorePoint.Areas.Admin.Controllers
 {
@@ -73,7 +69,7 @@ namespace CorePoint.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var state =_stateServices.GetDetailsById(id);
+            var state = _stateServices.GetDetailsById(id);
             if (state == null)
             {
                 return NotFound();
@@ -97,7 +93,7 @@ namespace CorePoint.Areas.Admin.Controllers
             {
                 try
                 {
-                    _stateServices.GetDetailsById(id);
+                    _stateServices.EditState(state);
                 }
                 catch (DbUpdateConcurrencyException)
                 {

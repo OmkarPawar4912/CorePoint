@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using CorePoint.DAL.Data;
+using CorePoint.DAL.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CorePoint.DAL.Data;
-using CorePoint.DAL.Models;
 
 namespace CorePoint.Areas.Admin.Controllers
 {

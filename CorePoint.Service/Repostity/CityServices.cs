@@ -8,51 +8,51 @@ using System.Linq;
 
 namespace CorePoint.Service.Repostity
 {
-    public class StateServices : IStateServices
+    public class CityServices : ICityServices
     {
         private readonly ApplicationContext _context;
-        public StateServices(ApplicationContext context)
+        public CityServices(ApplicationContext context)
         {
             _context = context;
         }
-        public IEnumerable<ViewModelState> GetList()
+        public IEnumerable<ViewModelCity> GetList()
         {
-            return _context.States.Select(s => new ViewModelState
+            return _context.Cities.Select(s => new ViewModelCity
             {
                 Id = s.Id,
                 Name = s.Name,
-                CountryId = s.CountryId,
-                CountryName = _context.Countries.Where(x => x.Id == s.CountryId).FirstOrDefault().Name
+                StateId = s.StateId,
+                StateName = _context.States.Where(x => x.Id == s.StateId).FirstOrDefault().Name
             }).ToList();
         }
 
-        public ViewModelState GetDetailsById(int? id)
+        public ViewModelCity GetDetailsById(int? id)
         {
             return GetList().FirstOrDefault(m => m.Id == id);
         }
 
-        public void CreateState(State state)
+        public void CreateCity(City city)
         {
-            _context.Add(state);
+            _context.Add(city);
             _context.SaveChanges();
         }
 
-        public void EditState(State state)
+        public void EditCity(City city)
         {
-            _context.Update(state);
+            _context.Update(city);
             _context.SaveChanges();
         }
 
         public void Delete(int? id)
         {
-            var state = _context.States.Find(id);
-            _context.States.Remove(state);
+            var city = _context.Cities.Find(id);
+            _context.Cities.Remove(city);
             _context.SaveChanges();
         }
 
-        public bool StateExists(int id)
+        public bool CityExists(int id)
         {
-            return _context.States.Any(e => e.Id == id);
+            return _context.Cities.Any(e => e.Id == id);
         }
 
         public void Dispose()

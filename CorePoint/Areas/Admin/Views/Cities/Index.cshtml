@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CorePoint.DAL.Models.City>
+﻿@model IEnumerable<CorePoint.Service.ViewModel.ViewModelCity>
 
 @{
     ViewData["Title"] = "Index";
@@ -16,7 +16,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.StateId)
+                @Html.DisplayNameFor(model => model.StateName)
             </th>
             <th></th>
         </tr>
@@ -28,7 +28,7 @@
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.StateId)
+                @Html.DisplayFor(modelItem => item.StateName)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |

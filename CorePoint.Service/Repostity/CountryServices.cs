@@ -2,13 +2,9 @@
 using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
 using CorePoint.Service.ViewModel;
-using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CorePoint.Service.Repostity
 {
@@ -24,7 +20,7 @@ namespace CorePoint.Service.Repostity
             return _context.Countries.Select(s => new ViewModelCountries
             {
                 Id = s.Id,
-                Name=s.Name
+                Name = s.Name
             }).ToList();
         }
 
@@ -47,7 +43,7 @@ namespace CorePoint.Service.Repostity
         public void EditCountry(Country country)
         {
             _context.Update(country);
-            _context.SaveChanges();             
+            _context.SaveChanges();
         }
 
         public void Delete(int? id)
@@ -59,7 +55,7 @@ namespace CorePoint.Service.Repostity
 
         public bool CountryExists(int id)
         {
-           return _context.Countries.Any(e => e.Id == id);
+            return _context.Countries.Any(e => e.Id == id);
         }
 
         public void Dispose()

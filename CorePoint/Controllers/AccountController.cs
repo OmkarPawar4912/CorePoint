@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace CorePoint.Controllers
 {
-     public class AccountController : Controller
+    public class AccountController : Controller
     {
         private readonly IAccountServices _accountServices;
         public AccountController(IAccountServices accountServices)

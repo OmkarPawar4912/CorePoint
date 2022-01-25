@@ -9,12 +9,12 @@ namespace CorePoint.DAL.Models
     public class Employee : IdentityUser
     {
         [StringLength(30)]
-        [RegularExpression("^[A-Z][a-z]*(\\s[A-Z][a-z]*)+$",ErrorMessage = "Each part of a name must start from capital letter and at least 2 parts separate")]
+        [RegularExpression("^[A-Z][a-z]*(\\s[A-Z][a-z]*)+$", ErrorMessage = "Each part of a name must start from capital letter and at least 2 parts separate")]
         public string FullName { get; set; }
-        [RegularExpression("^([7-9]{1})([0-9]{9})$",ErrorMessage ="Start with 7-9 and Only 10 digit no")]
+        [RegularExpression("^([7-9]{1})([0-9]{9})$", ErrorMessage = "Start with 7-9 and Only 10 digit no")]
         public string EmergencyPhoneNumber { get; set; }
         public int Gender { get; set; }
-        public DateTime DOB { get; set; }       
+        public DateTime DOB { get; set; }
         public int AddressId { get; set; }
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
