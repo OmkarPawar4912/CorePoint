@@ -1,8 +1,10 @@
 ﻿using CorePoint.DAL.Data;
 using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
+using CorePoint.Service.ViewModel;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,34 +19,42 @@ namespace CorePoint.Service.Repostity
         {
             _context = context;
         }
-        public async Task GetListAsync()
+        public IEnumerable<ViewModelCountries> GetList()
         {
-            await _context.Countries.ToListAsync();
+            return _context.Countries.Select(s => new ViewModelCountries
+            {
+                Id = s.Id,
+                Name=s.Name
+            }).ToList();
         }
 
-        public async Task<Country> GetDetailsByIdAsync(int? id)
+        public IEnumerable<Country> GetListCountry()
         {
-            var country = await _context.Countries.FirstOrDefaultAsync(m => m.Id == id);          
-            return country;
+            return _context.Countries.ToList();
         }
 
-        public async Task CreateCountryAsync(Country country)
+        public ViewModelCountries GetDetailsById(int? id)
+        {
+            return GetList().FirstOrDefault(m => m.Id == id);
+        }
+
+        public void CreateCountry(Country country)
         {
             _context.Add(country);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
-        public async Task EditCountry(Country country)
+        public void EditCountry(Country country)
         {
             _context.Update(country);
-            await _context.SaveChangesAsync();             
+            _context.SaveChanges();             
         }
 
-        public async Task DeleteAsync(int? id)
+        public void Delete(int? id)
         {
-            var country = await _context.Countries.FindAsync(id);
+            var country = _context.Countries.Find(id);
             _context.Countries.Remove(country);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
         }
 
         public bool CountryExists(int id)

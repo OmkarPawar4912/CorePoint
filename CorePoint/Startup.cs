@@ -25,6 +25,7 @@ namespace CorePoint
         {
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConString")));
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+            services.AddScoped<ICountryServices, CountryServices>();
             services.AddScoped<IAccountServices, AccountServices>();
             services.AddControllersWithViews();
         }
