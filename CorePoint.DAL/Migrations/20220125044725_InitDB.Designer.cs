@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorePoint.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220122161617_IdentityInheritedToEmployee")]
-    partial class IdentityInheritedToEmployee
+    [Migration("20220125044725_InitDB")]
+    partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,6 +20,70 @@ namespace CorePoint.DAL.Migrations
                 .HasAnnotation("ProductVersion", "3.1.21")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("CorePoint.DAL.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int")
+                        .HasMaxLength(6);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+                });
 
             modelBuilder.Entity("CorePoint.DAL.Models.Crew", b =>
                 {
@@ -38,7 +102,8 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(30)")
+                        .HasMaxLength(30);
 
                     b.Property<string>("Sitecode")
                         .HasColumnType("nvarchar(max)");
@@ -61,6 +126,9 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Area")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
 
@@ -69,6 +137,9 @@ namespace CorePoint.DAL.Migrations
 
                     b.Property<int>("CrewId")
                         .HasColumnType("int");
+
+                    b.Property<string>("FilePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("IncidentDate")
                         .HasColumnType("datetime2");
@@ -122,6 +193,24 @@ namespace CorePoint.DAL.Migrations
                     b.HasIndex("StatusID");
 
                     b.ToTable("IncidentStatuses");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.State", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.StatusType", b =>
@@ -345,11 +434,12 @@ namespace CorePoint.DAL.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Blood")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(6);
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -357,8 +447,14 @@ namespace CorePoint.DAL.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
+                    b.Property<int>("CrewId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DOB")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("EmergencyPhoneNumber")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FullName")
                         .HasColumnType("nvarchar(30)")
@@ -370,15 +466,11 @@ namespace CorePoint.DAL.Migrations
                     b.Property<DateTime>("HireDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("IncidentId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Pincode")
-                        .HasColumnType("int")
-                        .HasMaxLength(6);
+                    b.Property<bool>("IsSupervisior")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
@@ -386,9 +478,32 @@ namespace CorePoint.DAL.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
-                    b.HasIndex("IncidentId");
+                    b.HasIndex("AddressId");
+
+                    b.HasIndex("CrewId");
 
                     b.HasDiscriminator().HasValue("Employee");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.Address", b =>
+                {
+                    b.HasOne("CorePoint.DAL.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CorePoint.DAL.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CorePoint.DAL.Models.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.IncidentStatus", b =>
@@ -459,9 +574,17 @@ namespace CorePoint.DAL.Migrations
 
             modelBuilder.Entity("CorePoint.DAL.Models.Employee", b =>
                 {
-                    b.HasOne("CorePoint.DAL.Models.Incident", null)
-                        .WithMany("Employees")
-                        .HasForeignKey("IncidentId");
+                    b.HasOne("CorePoint.DAL.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CorePoint.DAL.Models.Crew", "Crew")
+                        .WithMany()
+                        .HasForeignKey("CrewId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

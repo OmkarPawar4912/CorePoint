@@ -5,14 +5,18 @@ using System.Threading.Tasks;
 
 namespace CorePoint.Controllers
 {
-    [Route("Account")]
-    public class AccountController : Controller
+     public class AccountController : Controller
     {
         private readonly IAccountServices _accountServices;
         public AccountController(IAccountServices accountServices)
         {
             _accountServices = accountServices;
         }
+        public IActionResult Login()
+        {
+            return View();
+        }
+
 
         [Route("SignUp")]
         public IActionResult SignUp()
@@ -40,12 +44,6 @@ namespace CorePoint.Controllers
                 viewSignUp.IsSuccess = true;
             }
             return View(viewSignUp);
-        }
-
-        [Route("Login")]
-        public IActionResult Login()
-        {
-            return View();
         }
 
         [HttpPost]
@@ -78,25 +76,5 @@ namespace CorePoint.Controllers
             }
             return View();
         }
-
-        [HttpGet]
-        [Route("ForgotPassword")]
-        public IActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Route("ForgotPassword")]
-        public IActionResult ForgotPassword(ViewModelForgotPassword viewModel)
-        {
-            if (ModelState.IsValid)
-            {
-                ModelState.Clear();
-                viewModel.EmailSent = true;
-            }
-            return View(viewModel);
-        }
-
     }
 }

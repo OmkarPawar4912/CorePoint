@@ -1,5 +1,4 @@
 ﻿using CorePoint.DAL.Enums;
-using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -21,5 +20,6 @@ namespace CorePoint.DAL.Models
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }
         public DateTime UpdateDate { get; set; }
+
     }
 }

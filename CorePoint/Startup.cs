@@ -52,6 +52,10 @@ namespace CorePoint
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                  name: "DefaultAreas",
+                  pattern: "{area:exists}/{controller=Admin}/{action=Index}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Account}/{action=Login}/{id?}");
             });

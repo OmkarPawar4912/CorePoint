@@ -19,6 +19,70 @@ namespace CorePoint.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("CorePoint.DAL.Models.Address", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ZipCode")
+                        .HasColumnType("int")
+                        .HasMaxLength(6);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CityId");
+
+                    b.HasIndex("CountryId");
+
+                    b.HasIndex("StateId");
+
+                    b.ToTable("Addresses");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.City", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StateId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Cities");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.Country", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Countries");
+                });
+
             modelBuilder.Entity("CorePoint.DAL.Models.Crew", b =>
                 {
                     b.Property<int>("ID")
@@ -127,6 +191,24 @@ namespace CorePoint.DAL.Migrations
                     b.HasIndex("StatusID");
 
                     b.ToTable("IncidentStatuses");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.State", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("CountryId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("States");
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.StatusType", b =>
@@ -350,12 +432,12 @@ namespace CorePoint.DAL.Migrations
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(100)")
-                        .HasMaxLength(100);
+                    b.Property<int>("AddressId")
+                        .HasColumnType("int");
 
                     b.Property<int>("Blood")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(6);
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");
@@ -385,9 +467,8 @@ namespace CorePoint.DAL.Migrations
                     b.Property<bool>("IsActive")
                         .HasColumnType("bit");
 
-                    b.Property<int>("Pincode")
-                        .HasColumnType("int")
-                        .HasMaxLength(6);
+                    b.Property<bool>("IsSupervisior")
+                        .HasColumnType("bit");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
@@ -395,9 +476,32 @@ namespace CorePoint.DAL.Migrations
                     b.Property<DateTime>("UpdateDate")
                         .HasColumnType("datetime2");
 
+                    b.HasIndex("AddressId");
+
                     b.HasIndex("CrewId");
 
                     b.HasDiscriminator().HasValue("Employee");
+                });
+
+            modelBuilder.Entity("CorePoint.DAL.Models.Address", b =>
+                {
+                    b.HasOne("CorePoint.DAL.Models.City", "City")
+                        .WithMany()
+                        .HasForeignKey("CityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CorePoint.DAL.Models.Country", "Country")
+                        .WithMany()
+                        .HasForeignKey("CountryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CorePoint.DAL.Models.State", "State")
+                        .WithMany()
+                        .HasForeignKey("StateId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.IncidentStatus", b =>
@@ -468,6 +572,12 @@ namespace CorePoint.DAL.Migrations
 
             modelBuilder.Entity("CorePoint.DAL.Models.Employee", b =>
                 {
+                    b.HasOne("CorePoint.DAL.Models.Address", "Address")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("CorePoint.DAL.Models.Crew", "Crew")
                         .WithMany()
                         .HasForeignKey("CrewId")
