@@ -27,6 +27,7 @@ namespace CorePoint
             services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
             services.AddScoped<ICountryServices, CountryServices>();
             services.AddScoped<IAccountServices, AccountServices>();
+            services.AddScoped<IStateServices, StateServices>();
             services.AddControllersWithViews();
         }
 

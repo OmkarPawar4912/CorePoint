@@ -7,35 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CorePoint.DAL.Data;
 using CorePoint.DAL.Models;
+using CorePoint.Service.Interfaces;
 
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class StatesController : Controller
     {
-        private readonly ApplicationContext _context;
-
-        public StatesController(ApplicationContext context)
+        private readonly IStateServices _stateServices;
+        public StatesController(IStateServices stateServices)
         {
-            _context = context;
+            _stateServices = stateServices;
         }
 
         // GET: Admin/States
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.States.ToListAsync());
+            return View(_stateServices.GetList().ToList());
         }
 
         // GET: Admin/States/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var state = await _context.States
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var state = _stateServices.GetDetailsById(id);
+
             if (state == null)
             {
                 return NotFound();
@@ -55,26 +55,25 @@ namespace CorePoint.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,CountryId")] State state)
+        public IActionResult Create([Bind("Id,Name,CountryId")] State state)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(state);
-                await _context.SaveChangesAsync();
+                _stateServices.CreateState(state);
                 return RedirectToAction(nameof(Index));
             }
             return View(state);
         }
 
         // GET: Admin/States/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var state = await _context.States.FindAsync(id);
+            var state =_stateServices.GetDetailsById(id);
             if (state == null)
             {
                 return NotFound();
@@ -87,7 +86,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,CountryId")] State state)
+        public IActionResult Edit(int id, [Bind("Id,Name,CountryId")] State state)
         {
             if (id != state.Id)
             {
@@ -98,12 +97,11 @@ namespace CorePoint.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(state);
-                    await _context.SaveChangesAsync();
+                    _stateServices.GetDetailsById(id);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!StateExists(state.Id))
+                    if (!_stateServices.StateExists(state.Id))
                     {
                         return NotFound();
                     }
@@ -125,8 +123,7 @@ namespace CorePoint.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var state = await _context.States
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var state = _stateServices.GetDetailsById(id);
             if (state == null)
             {
                 return NotFound();
@@ -138,17 +135,10 @@ namespace CorePoint.Areas.Admin.Controllers
         // POST: Admin/States/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var state = await _context.States.FindAsync(id);
-            _context.States.Remove(state);
-            await _context.SaveChangesAsync();
+            _stateServices.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool StateExists(int id)
-        {
-            return _context.States.Any(e => e.Id == id);
         }
     }
 }
