@@ -1,38 +1,36 @@
-﻿using CorePoint.DAL.Data;
-using CorePoint.DAL.Models;
+﻿using CorePoint.DAL.Models;
+using CorePoint.Service.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class CrewsController : Controller
     {
-        private readonly ApplicationContext _context;
+        private readonly ICrewsServices _crewsServices;
 
-        public CrewsController(ApplicationContext context)
+        public CrewsController(ICrewsServices crewsServices)
         {
-            _context = context;
+            _crewsServices = crewsServices;
         }
 
         // GET: Admin/Crews
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.Crews.ToListAsync());
+            return View(_crewsServices.GetList().ToList());
         }
 
         // GET: Admin/Crews/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public IActionResult Details(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var crew = await _context.Crews
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var crew = _crewsServices.GetDetailsById(id);
             if (crew == null)
             {
                 return NotFound();
@@ -52,26 +50,25 @@ namespace CorePoint.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Name,Code,Sitecode,CreateBy,CreateDate,UpdateBy,UpdateDate")] Crew crew)
+        public IActionResult Create([Bind("ID,Name,Code,Sitecode,CreateBy,CreateDate,UpdateBy,UpdateDate")] Crew crew)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(crew);
-                await _context.SaveChangesAsync();
+                _crewsServices.CreateCrew(crew);
                 return RedirectToAction(nameof(Index));
             }
             return View(crew);
         }
 
         // GET: Admin/Crews/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public IActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var crew = await _context.Crews.FindAsync(id);
+            var crew = _crewsServices.GetDetailsById(id);
             if (crew == null)
             {
                 return NotFound();
@@ -84,7 +81,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Code,Sitecode,CreateBy,CreateDate,UpdateBy,UpdateDate")] Crew crew)
+        public IActionResult Edit(int id, [Bind("ID,Name,Code,Sitecode,CreateBy,CreateDate,UpdateBy,UpdateDate")] Crew crew)
         {
             if (id != crew.ID)
             {
@@ -95,12 +92,11 @@ namespace CorePoint.Areas.Admin.Controllers
             {
                 try
                 {
-                    _context.Update(crew);
-                    await _context.SaveChangesAsync();
+                    _crewsServices.EditCrew(crew);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CrewExists(crew.ID))
+                    if (!_crewsServices.CrewExists(crew.ID))
                     {
                         return NotFound();
                     }
@@ -115,15 +111,14 @@ namespace CorePoint.Areas.Admin.Controllers
         }
 
         // GET: Admin/Crews/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public IActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
 
-            var crew = await _context.Crews
-                .FirstOrDefaultAsync(m => m.ID == id);
+            var crew = _crewsServices.GetDetailsById(id);
             if (crew == null)
             {
                 return NotFound();
@@ -135,17 +130,10 @@ namespace CorePoint.Areas.Admin.Controllers
         // POST: Admin/Crews/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public IActionResult DeleteConfirmed(int id)
         {
-            var crew = await _context.Crews.FindAsync(id);
-            _context.Crews.Remove(crew);
-            await _context.SaveChangesAsync();
+            _crewsServices.Delete(id);
             return RedirectToAction(nameof(Index));
-        }
-
-        private bool CrewExists(int id)
-        {
-            return _context.Crews.Any(e => e.ID == id);
         }
     }
 }

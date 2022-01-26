@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorePoint.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220125044725_InitDB")]
+    [Migration("20220126043009_InitDB")]
     partial class InitDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,6 +27,9 @@ namespace CorePoint.DAL.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AddressLine")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
@@ -438,8 +441,7 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Blood")
-                        .HasColumnType("int")
-                        .HasMaxLength(6);
+                        .HasColumnType("int");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");

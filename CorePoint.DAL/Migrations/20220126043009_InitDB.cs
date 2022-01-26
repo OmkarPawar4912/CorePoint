@@ -145,6 +145,7 @@ namespace CorePoint.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    AddressLine = table.Column<string>(nullable: true),
                     CityId = table.Column<int>(nullable: false),
                     StateId = table.Column<int>(nullable: false),
                     CountryId = table.Column<int>(nullable: false),
@@ -226,7 +227,7 @@ namespace CorePoint.DAL.Migrations
                     Gender = table.Column<int>(nullable: true),
                     DOB = table.Column<DateTime>(nullable: true),
                     AddressId = table.Column<int>(nullable: true),
-                    Blood = table.Column<int>(maxLength: 6, nullable: true),
+                    Blood = table.Column<int>(nullable: true),
                     CrewId = table.Column<int>(nullable: true),
                     IsSupervisior = table.Column<bool>(nullable: true),
                     HireDate = table.Column<DateTime>(nullable: true),

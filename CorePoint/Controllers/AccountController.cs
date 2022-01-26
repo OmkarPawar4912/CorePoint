@@ -17,35 +17,6 @@ namespace CorePoint.Controllers
             return View();
         }
 
-
-        [Route("SignUp")]
-        public IActionResult SignUp()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [Route("SignUp")]
-        public async Task<IActionResult> SignUp(ViewModelSignUp viewSignUp)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await _accountServices.CreateUserAsync(viewSignUp);
-
-                if (!result.Succeeded)
-                {
-                    foreach (var errorMessage in result.Errors)
-                    {
-                        ModelState.AddModelError("", errorMessage.Description);
-                    }
-                    return View(viewSignUp);
-                }
-                ModelState.Clear();
-                viewSignUp.IsSuccess = true;
-            }
-            return View(viewSignUp);
-        }
-
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([Bind("Email,Password")] ViewModelLogin modelLogin)

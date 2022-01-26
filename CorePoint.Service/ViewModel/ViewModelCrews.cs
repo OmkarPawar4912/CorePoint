@@ -1,15 +1,12 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CorePoint.DAL.Models
+namespace CorePoint.Service.ViewModel
 {
-    public class Crew
+    public class ViewModelCrews
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID { get; set; }
-        [StringLength(30)]
+        [Display(Name = "Crews")]
         public string Name { get; set; }
         public string Code { get; set; }
         public string Sitecode { get; set; }
@@ -17,5 +14,6 @@ namespace CorePoint.DAL.Models
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }
         public DateTime UpdateDate { get; set; }
+
     }
 }

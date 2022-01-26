@@ -18,7 +18,7 @@ namespace CorePoint.DAL.Models
         public int AddressId { get; set; }
         [ForeignKey("AddressId")]
         public virtual Address Address { get; set; }
-        [MaxLength(6)]
+        [Required(ErrorMessage = "Select Blood Type")]
         public Blood Blood { get; set; }
         [ForeignKey("Crew")]
         public int CrewId { get; set; }

@@ -29,6 +29,8 @@ namespace CorePoint
             services.AddScoped<IAccountServices, AccountServices>();
             services.AddScoped<IStateServices, StateServices>();
             services.AddScoped<ICityServices, CityServices>();
+            services.AddScoped<ICrewsServices, CrewsServices>();
+            services.AddScoped<IEmployeeServices, EmployeeServices>();
             services.AddControllersWithViews();
         }
 

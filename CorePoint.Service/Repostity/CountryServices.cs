@@ -58,6 +58,11 @@ namespace CorePoint.Service.Repostity
             return _context.Countries.Any(e => e.Id == id);
         }
 
+        public IList<Country> GetCountryList()
+        {
+            return _context.Countries.ToList();
+        }
+
         public void Dispose()
         {
             _context.Dispose();

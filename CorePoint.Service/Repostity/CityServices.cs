@@ -60,5 +60,11 @@ namespace CorePoint.Service.Repostity
             _context.Dispose();
             GC.SuppressFinalize(this);
         }
+
+        public IList<City> GetCityList(int stateId)
+        {
+            return _context.Cities.Where(m => m.StateId == stateId).ToList();
+        }
     }
 }
+

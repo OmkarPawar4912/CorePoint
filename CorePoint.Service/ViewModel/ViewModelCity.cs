@@ -12,6 +12,5 @@ namespace CorePoint.Service.ViewModel
         public string StateName { get; set; }
         [Display(Name = "Country")]
         public string CountryName { get; set; }
-
     }
 }

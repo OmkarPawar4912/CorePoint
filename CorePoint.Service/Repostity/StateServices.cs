@@ -54,6 +54,10 @@ namespace CorePoint.Service.Repostity
         {
             return _context.States.Any(e => e.Id == id);
         }
+        public IList<State> GetStatesByCountryId(int countryId)
+        {
+            return _context.States.Where(m => m.CountryId == countryId).ToList();
+        }
 
         public void Dispose()
         {

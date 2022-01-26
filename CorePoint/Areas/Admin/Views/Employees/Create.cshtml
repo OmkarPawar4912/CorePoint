@@ -1,0 +1,206 @@
+﻿@using CorePoint.DAL.Enums
+@model CorePoint.Service.ViewModel.ViewModelEmployee
+<style>
+
+</style>
+<form asp-action="Create">
+    <div class="pagetitle">
+        <div class="card">
+            <div class="card-body-head">
+                <div class="float-left">
+                    <h5 class="card-title">Create Employee</h5>
+                </div>
+                <div class="float-right">
+                    <input type="submit" value="Create" class="btn btn-primary" />
+                    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="section">
+
+        <div class="row">
+            <!---- Employee Details --->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Employee Info</h5>
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="form-group mb-2">
+                            <label asp-for="Email" class="control-label"></label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label asp-for="FullName" class="control-label"></label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <label asp-for="PhoneNumber" class="control-label"></label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                            </div>
+                            <div class="col mb-2">
+                                <label asp-for="EmergencyPhoneNumber" class="control-label"></label>
+                                <input asp-for="EmergencyPhoneNumber" class="form-control" />
+                                <span asp-validation-for="EmergencyPhoneNumber" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label asp-for="Password" class="control-label"></label>
+                            <input asp-for="Password" class="form-control" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label class="control-label" asp-for="ConfirmPassword"> </label>
+                            <input asp-for="ConfirmPassword" class="form-control" />
+                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---- End Employee Details --->
+            <!---- Employee Address --->
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Personal Info</h5>
+
+                        <div class="form-group mb-2">
+                            <label asp-for="DOB" class="control-label"></label>
+                            <input asp-for="DOB" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                            <span asp-validation-for="DOB" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label asp-for="Blood" class="control-label"></label>
+                            <select asp-for="Blood" class="form-control" asp-items="ViewBag.bloodList"></select>
+                            <span asp-validation-for="Blood" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-2">
+                            <label asp-for="CrewId" class="control-label"></label>
+                            @Html.DropDownListFor(Model => Model.CrewId, new SelectList(ViewBag.CrewsList, "ID", "Name"),
+                            "-- Select Crew --", new { id = "ddlCrewList", @class="form-control"})
+                            <span asp-validation-for="CrewId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label asp-for="HireDate" class="control-label"></label>
+                            <input asp-for="HireDate" asp-format="{0:yyyy-MM-dd}" class="form-control" />
+                            <span asp-validation-for="HireDate" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mb-4">
+                            <label>Gender </label> &nbsp;&nbsp;
+                            @foreach (var g in System.Enum.GetValues(typeof(Gender)))
+                            {
+                                <input type="radio" asp-for="Gender" value="@((int)g)" />
+                                <label class="rbtnlbl" asp-for="Gender">@g</label>
+                            }
+                            <span asp-validation-for="Gender" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!---- End Employee Adress --->
+        <!---- Employee Address --->
+        <div class="col-lg-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Address Info</h5>
+                    <div class="form-group mb-3">
+                        <label asp-for="Address.AddressLine" class="control-label"></label>
+                        <textarea maxlength="50" asp-for="Address.AddressLine" asp-format="{0:d}" class="form-control"></textarea>
+                        <span id="characters" style="color:#999;">50</span> <span style="color:#999;">left</span>
+                        <span asp-validation-for="Address.AddressLine" class="text-danger"></span>
+                    </div>
+                    <div class="form-group mb-3">
+                        <div class="row">
+                            <div class="col mb-2">
+                                <label asp-for="Address.CountryId" class="control-label"></label>
+                                @Html.DropDownListFor(Model => Model.Address.CountryId, new SelectList(ViewBag.CountryList, "Id", "Name"),
+                                "-- Select Country --", new { id = "ddCountry", @class="form-control"})
+                                <span asp-validation-for="Address.CountryId" class="text-danger"></span>
+                            </div>
+                            <div class="col mb-2">
+                                <label asp-for="Address.StateId" class="control-label"></label>
+                                @Html.DropDownListFor(Model => Model.Address.StateId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"),
+                                "-- Select State --", new { id = "ddState",@class="form-control" })
+                                <span asp-validation-for="Address.StateId" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col mb-2">
+                                <label asp-for="Address.CityId" class="control-label"></label>
+                                @Html.DropDownListFor(Model => Model.Address.CityId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"),
+                                "-- Select City --", new { id = "ddCity",@class="form-control" })
+                                <span asp-validation-for="Address.CityId" class="text-danger"></span>
+                            </div>
+                            <div class="col mb-2">
+                                <label asp-for="Address.ZipCode" class="control-label"></label>
+                                <input type="text" asp-for="Address.ZipCode" maxlength="6" asp-format="{0:d}" class="form-control" />
+                                <span asp-validation-for="Address.ZipCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="form-group p-3">
+                            <label class="form-check-label">
+                                <input class="form-check-input" checked asp-for="IsActive" /> @Html.DisplayNameFor(model => model.IsActive)
+                            </label>
+
+                            <label class="form-check-label">
+                                <input class="form-check-input" asp-for="IsSupervisior" /> @Html.DisplayNameFor(model => model.IsSupervisior)
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!---- End Employee Adress --->
+        </div>
+
+    </section>
+</form>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $('textarea').keyup(updateCount);
+    $('textarea').keydown(updateCount);
+
+    function updateCount() {
+    var cs = [50- $(this).val().length];
+    $('#characters').text(cs);
+    }
+
+        $(document).ready(function () {
+            $("#ddCountry").change(function () {
+                var id = $(this).val();
+                $("#ddState").empty();
+                 $("#ddCity").empty();
+                  var c = "<option>-- Select City --</option>";
+                  $("#ddCity").html(c);
+                $.get("../Employees/GetStateByCountryId", { countryId: id }, function (data) {
+                    var v = "<option>-- Select Distric --</option>";
+                    $.each(data, function (i, v1) {
+                        v += "<option value=" + v1.value + ">" + v1.text + "</option>";
+                    });
+                    $("#ddState").html(v);
+                });
+            });
+            $("#ddState").change(function () {
+                var id = $(this).val();
+                $("#ddCity").empty();
+                $.get("../Employees/GetCityByStateId", { stateId: id }, function (data) {
+                    var v = "<option>-- Select City --</option>";
+                    $.each(data, function (i, v1) {
+                        v += "<option value=" + v1.value + ">" + v1.text + "</option>";
+                    });
+                    $("#ddCity").html(v);
+                });
+            });
+        });
+</script>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}

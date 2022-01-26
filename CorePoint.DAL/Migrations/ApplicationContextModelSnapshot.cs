@@ -26,6 +26,9 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AddressLine")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("CityId")
                         .HasColumnType("int");
 
@@ -436,8 +439,7 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("Blood")
-                        .HasColumnType("int")
-                        .HasMaxLength(6);
+                        .HasColumnType("int");
 
                     b.Property<string>("CreateBy")
                         .HasColumnType("nvarchar(max)");

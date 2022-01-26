@@ -13,5 +13,7 @@ namespace CorePoint.Service.Interfaces
         public ViewModelCountries GetDetailsById(int? id);
         public IEnumerable<ViewModelCountries> GetList();
         public bool CountryExists(int id);
+        void Dispose();
+        public IList<Country> GetCountryList();
     }
 }

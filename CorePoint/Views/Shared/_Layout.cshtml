@@ -28,6 +28,9 @@
 
   <!-- Template Main CSS File -->
   <link href="~/assets/css/style.css" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/jquery.validate.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validation-unobtrusive/3.2.11/jquery.validate.unobtrusive.min.js"></script>
 
    </head>
 <body>
@@ -146,13 +149,8 @@
             </a>
           </li>
           <li>
-            <a asp-controller="Workout" asp-action="Create" >
-              <i class="bi bi-circle"></i><span>Workout</span>
-            </a>
-          </li>
-          <li>
-            <a asp-controller="User" asp-action="Create" asp-area="" >
-              <i class="bi bi-circle"></i><span>User</span>
+            <a asp-controller="Employees" asp-action="Create" >
+              <i class="bi bi-circle"></i><span>Employees</span>
             </a>
           </li>
         </ul>
@@ -193,13 +191,6 @@
   <main id="main" class="main">
         @RenderBody()
  </main><!-- End #main -->
-
-  <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer fixed-bottom"">
-    <div class="copyright">
-      &copy; Copyright <strong><span>GMS</span></strong>. All Rights Reserved
-    </div>
-  </footer><!-- End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
