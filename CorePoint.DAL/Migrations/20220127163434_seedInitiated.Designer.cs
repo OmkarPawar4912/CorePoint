@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorePoint.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220127141045_seeddata")]
-    partial class seeddata
+    [Migration("20220127163434_seedInitiated")]
+    partial class seedInitiated
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -222,10 +222,6 @@ namespace CorePoint.DAL.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("CrewUserName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
@@ -242,9 +238,6 @@ namespace CorePoint.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsConfidence")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Severity")
                         .HasColumnType("int");
 
@@ -252,7 +245,6 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SupervisorUserName")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdateBy")
@@ -375,6 +367,28 @@ namespace CorePoint.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("StatusTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Initiated"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "InProgress"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Complete"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Name = "Rejected"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -667,16 +681,16 @@ namespace CorePoint.DAL.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "f4fb0a94-6c0c-4305-814b-28358661e2f6",
+                            ConcurrencyStamp = "251d9489-20ad-4e51-b5a6-aa31d4443230",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMnWCFvL1cjVvahBWfKdtIZapTeYMoAh9fOqeHCpyHpzk8g8UPmcOIrGbfB/JtzNBw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGxjhzt+PdYkEdiHBnL9VsCQStdWNNdBUBq6e3k0H/lDs48kdWwNqN1MDXP0He+lvg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1062f659-22d2-41bc-baee-ab5856dceff5",
+                            SecurityStamp = "a6fe0962-e0b7-4bb0-8f79-3b363bb48b31",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             AddressId = 1,

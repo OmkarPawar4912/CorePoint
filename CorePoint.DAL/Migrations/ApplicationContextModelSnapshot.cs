@@ -236,9 +236,6 @@ namespace CorePoint.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("IsConfidence")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Severity")
                         .HasColumnType("int");
 
@@ -368,6 +365,28 @@ namespace CorePoint.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("StatusTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Initiated"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "InProgress"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Complete"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Name = "Rejected"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -660,16 +679,16 @@ namespace CorePoint.DAL.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "528bc254-b05d-4fc2-8555-2c45521530b5",
+                            ConcurrencyStamp = "251d9489-20ad-4e51-b5a6-aa31d4443230",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAECK2S0okgRDrjSQMmxTp4fNAeAo8aegjqeR40IoUuW8YFZbaIrEIUr9NAfWJOc9p5w==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEGxjhzt+PdYkEdiHBnL9VsCQStdWNNdBUBq6e3k0H/lDs48kdWwNqN1MDXP0He+lvg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "df753719-4503-4f2b-a54d-17ebfa4c1add",
+                            SecurityStamp = "a6fe0962-e0b7-4bb0-8f79-3b363bb48b31",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             AddressId = 1,

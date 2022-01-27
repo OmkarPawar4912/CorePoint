@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CorePoint.DAL.Migrations
 {
-    public partial class seeddata : Migration
+    public partial class seedInitiated : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -74,15 +74,13 @@ namespace CorePoint.DAL.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     EmailId = table.Column<string>(nullable: true),
-                    SupervisorUserName = table.Column<string>(nullable: false),
-                    CrewUserName = table.Column<string>(nullable: false),
+                    SupervisorUserName = table.Column<string>(nullable: true),
                     Shift = table.Column<int>(nullable: false),
                     IncidentType = table.Column<string>(nullable: false),
                     Area = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     FilePath = table.Column<string>(nullable: true),
                     Severity = table.Column<int>(nullable: false),
-                    IsConfidence = table.Column<bool>(nullable: false),
                     IncidentDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<string>(nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false),
@@ -361,8 +359,8 @@ namespace CorePoint.DAL.Migrations
                     { 6, "Queens", 4 },
                     { 1, "Sangli", 1 },
                     { 4, "Bronx", 4 },
-                    { 3, "Kolhapur", 1 },
                     { 2, "Miraj", 1 },
+                    { 3, "Kolhapur", 1 },
                     { 5, "Kings", 4 }
                 });
 
@@ -386,14 +384,25 @@ namespace CorePoint.DAL.Migrations
                 columns: new[] { "Id", "CountryId", "Name" },
                 values: new object[,]
                 {
-                    { 1, 1, "Maharatra" },
-                    { 2, 1, "Goa" },
-                    { 3, 1, "Andhra Pradesh" },
-                    { 4, 2, "New York" },
-                    { 5, 2, "Buffalo" },
-                    { 6, 3, "Fukuoka" },
+                    { 8, 3, "Aichi" },
                     { 7, 3, "Gumma" },
-                    { 8, 3, "Aichi" }
+                    { 5, 2, "Buffalo" },
+                    { 4, 2, "New York" },
+                    { 3, 1, "Andhra Pradesh" },
+                    { 1, 1, "Maharatra" },
+                    { 6, 3, "Fukuoka" },
+                    { 2, 1, "Goa" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "StatusTypes",
+                columns: new[] { "ID", "Name" },
+                values: new object[,]
+                {
+                    { 1, "Initiated" },
+                    { 2, "InProgress" },
+                    { 3, "Complete" },
+                    { 4, "Rejected" }
                 });
 
             migrationBuilder.InsertData(
@@ -404,7 +413,7 @@ namespace CorePoint.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "AddressId", "Blood", "CreateBy", "CreateDate", "CrewId", "DOB", "EmergencyPhoneNumber", "FullName", "Gender", "HireDate", "IsActive", "IsSupervisior", "UpdateBy", "UpdateDate" },
-                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "f4fb0a94-6c0c-4305-814b-28358661e2f6", "Employee", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEMnWCFvL1cjVvahBWfKdtIZapTeYMoAh9fOqeHCpyHpzk8g8UPmcOIrGbfB/JtzNBw==", "1234567890", false, "1062f659-22d2-41bc-baee-ab5856dceff5", false, "admin@gmail.com", 1, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "251d9489-20ad-4e51-b5a6-aa31d4443230", "Employee", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEGxjhzt+PdYkEdiHBnL9VsCQStdWNNdBUBq6e3k0H/lDs48kdWwNqN1MDXP0He+lvg==", "1234567890", false, "a6fe0962-e0b7-4bb0-8f79-3b363bb48b31", false, "admin@gmail.com", 1, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

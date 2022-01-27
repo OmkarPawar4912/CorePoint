@@ -1,4 +1,6 @@
 ﻿using CorePoint.DAL.Models;
+using CorePoint.Service.ViewModel;
+using System.Collections.Generic;
 
 namespace CorePoint.Service.Interfaces
 {
@@ -9,5 +11,6 @@ namespace CorePoint.Service.Interfaces
         void Delete(int? id);
         void Dispose();
         void EditCrew(Incident incident);
+        List<ViewModelIncidentStatus> GetAllCases();
     }
 }

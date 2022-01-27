@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CorePoint.DAL.Models.Incident>
+﻿@model IEnumerable<CorePoint.Service.ViewModel.ViewModelIncidentStatus>
 <div class="pagetitle">
     <div class="card">
         <div class="card-body-head">
@@ -22,22 +22,25 @@
                         <thead>
                             <tr>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Id)
+                                    @Html.DisplayNameFor(model => model.vmId)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.SupervisorUserName)
+                                    @Html.DisplayNameFor(model => model.vmLateststatus)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Shift)
+                                    @Html.DisplayNameFor(model => model.vmIncidentType)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.IncidentType)                               
+                                    @Html.DisplayNameFor(model => model.vmIncidentType)                               
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Severity)
+                                    @Html.DisplayNameFor(model => model.vmServertiy)
                                 </th>
                                <th>
-                                    @Html.DisplayNameFor(model => model.IncidentDate)
+                                    @Html.DisplayNameFor(model => model.vmIncidentDate)
+                                </th>
+                                 <th>
+                                    @Html.DisplayNameFor(model => model.vmIncidentReportDate)
                                 </th>
                             </tr>
                         </thead>
@@ -45,24 +48,27 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                    <td>
-                                        @Html.DisplayFor(model => item.Id)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => item.SupervisorUserName)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => item.Shift)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => item.IncidentType)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => item.Severity)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(model => item.IncidentDate)
-                                    </td>
+                                  <td>
+                                    @Html.DisplayFor(model => @item.vmId)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => @item.vmLateststatus)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => @item.vmIncidentType)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => @item.vmIncidentType)                               
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(model => @item.vmServertiy)
+                                </td>
+                               <td>
+                                    @Html.DisplayFor(model => @item.vmIncidentDate)
+                                </td>
+                                 <td>
+                                    @Html.DisplayFor(model => @item.vmIncidentReportDate)
+                                </td>
                                 </tr>
                             }
                         </tbody>

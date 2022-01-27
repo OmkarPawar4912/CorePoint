@@ -24,10 +24,9 @@ namespace CorePoint.Areas.Admin.Controllers
         }
 
         // GET: Admin/Incidents
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-
-            return View(await _context.Incidents.ToListAsync());
+           return View(_incidentServices.GetAllCases());
         }
 
         // GET: Admin/Incidents/Details/5
@@ -67,7 +66,6 @@ namespace CorePoint.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,SupervisorUserName,EmailId,Shift,IncidentType,Area,Description,FilePath,Severity,IncidentDate")] Incident incident)
         {
-
             if (ModelState.IsValid)
             {
                 _incidentServices.CreateIncident(incident);
@@ -78,6 +76,12 @@ namespace CorePoint.Areas.Admin.Controllers
                 AllddlBind();
             }
             return View(incident);
+        }
+
+        // GET: Admin/Incidents/Edit/1
+        public IActionResult Edit(int id)
+        {
+            return View();
         }
 
     }
