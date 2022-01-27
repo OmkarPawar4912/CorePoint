@@ -15,12 +15,14 @@ namespace CorePoint.Service.ViewModel
         [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
         [Required]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Phone")]
         public string PhoneNumber { get; set; }
         [Required(ErrorMessage = "Please enter your Emergency Phone Number")]
         [Display(Name = "Emergency Phone Number")]
         public string EmergencyPhoneNumber { get; set; }
+
         [Required(ErrorMessage = "Please enter your Password")]
+        [RegularExpression("^.*(?=.{6,})(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).*$", ErrorMessage = "Must contain at least one one lower case letter, one upper case letter, one digit and one special character")]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         [Required(ErrorMessage = "Please enter your Confirm Password")]
@@ -45,16 +47,19 @@ namespace CorePoint.Service.ViewModel
         public Blood Blood { get; set; }
         [Display(Name = "Crew")]
         public int CrewId { get; set; }
+        [Display(Name = "Crew")]
         public string CrewName { get; set; }
-        [Display(Name = "Is Supervisior")]
+        [Display(Name = "Supervisior")]
         public bool IsSupervisior { get; set; }
         [Required]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         [Display(Name = "Hire Date")]
         public DateTime HireDate { get; set; }
-        [Display(Name = "Is Active")]
+        [Display(Name = "Active")]
         public Boolean IsActive { get; set; } = false;
         public string CreateBy { get; set; }
+        [Display(Name = "Registration")]
+        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:yyyy-MM-dd}")]
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }
         public DateTime UpdateDate { get; set; }

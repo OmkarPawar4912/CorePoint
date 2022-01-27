@@ -63,8 +63,6 @@ namespace CorePoint.Areas.Admin.Controllers
         }
 
         //POST: Admin/Employees/Create 
-        //To protect from overposting attacks, enable the specific properties you want to bind to, for  
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ViewModelEmployee modelEmployee)
@@ -72,8 +70,6 @@ namespace CorePoint.Areas.Admin.Controllers
 
             if (ModelState.IsValid)
             {
-
-
                 var result = await _accountServices.CreateUserAsync(modelEmployee);
                 if (!result.Succeeded)
                 {
@@ -81,7 +77,10 @@ namespace CorePoint.Areas.Admin.Controllers
                     {
                         ModelState.AddModelError("", errorMessage.Description);
                     }
-                    return View();
+                    ViewBag.bloodList = _employeeServices.GetddlBoold();
+                    ViewBag.CrewsList = _crewsServices.GetddlCrews().ToList();
+                    ViewBag.CountryList = _countryServices.GetCountryList();
+                    return View(modelEmployee);
                 }
 
                 ModelState.Clear();

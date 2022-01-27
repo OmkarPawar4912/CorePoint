@@ -12,5 +12,6 @@ namespace CorePoint.Service.Interfaces
         Task<IdentityResult> CreateUserAsync(ViewModelEmployee viewModel);
         Task<SignInResult> PasswordSignInAsync(ViewModelLogin viewModel);
         Task<IdentityRole> GetRoleByNameAsync(string userName);
+        Task SignOutAsync();
     }
 }

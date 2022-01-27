@@ -25,10 +25,10 @@ namespace CorePoint.Controllers
             {
                 var result = await _accountServices.PasswordSignInAsync(modelLogin);
                 if (result.Succeeded)
-                {
+                { 
                     if (User.IsInRole("Admin"))
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Index", "Home", new { Areas = "Admin" });
                     }
                     else if (User.IsInRole("Supervisor"))
                     {
@@ -46,6 +46,13 @@ namespace CorePoint.Controllers
                 }
             }
             return View();
+        }
+
+        [Route("Logout")]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountServices.SignOutAsync();
+            return LocalRedirect("~/");
         }
     }
 }

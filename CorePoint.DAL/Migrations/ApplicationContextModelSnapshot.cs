@@ -27,7 +27,9 @@ namespace CorePoint.DAL.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("AddressLine")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)")
+                        .HasMaxLength(50);
 
                     b.Property<int>("CityId")
                         .HasColumnType("int");
@@ -39,8 +41,7 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("ZipCode")
-                        .HasColumnType("int")
-                        .HasMaxLength(6);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -51,6 +52,17 @@ namespace CorePoint.DAL.Migrations
                     b.HasIndex("StateId");
 
                     b.ToTable("Addresses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AddressLine = "N/A",
+                            CityId = 1,
+                            CountryId = 1,
+                            StateId = 1,
+                            ZipCode = 0
+                        });
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.City", b =>
@@ -69,6 +81,50 @@ namespace CorePoint.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Cities");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Sangli",
+                            StateId = 1
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Miraj",
+                            StateId = 1
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Kolhapur",
+                            StateId = 1
+                        },
+                        new
+                        {
+                            Id = 4,
+                            Name = "Bronx",
+                            StateId = 4
+                        },
+                        new
+                        {
+                            Id = 5,
+                            Name = "Kings",
+                            StateId = 4
+                        },
+                        new
+                        {
+                            Id = 6,
+                            Name = "Queens",
+                            StateId = 4
+                        },
+                        new
+                        {
+                            Id = 7,
+                            Name = "Sapporo",
+                            StateId = 5
+                        });
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.Country", b =>
@@ -84,6 +140,23 @@ namespace CorePoint.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Countries");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "India"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "USA"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            Name = "Japan"
+                        });
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.Crew", b =>
@@ -118,6 +191,17 @@ namespace CorePoint.DAL.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("Crews");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Code = "N/A",
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Name = "N/A",
+                            Sitecode = "N/A",
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.Incident", b =>
@@ -212,6 +296,56 @@ namespace CorePoint.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("States");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CountryId = 1,
+                            Name = "Maharatra"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CountryId = 1,
+                            Name = "Goa"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CountryId = 1,
+                            Name = "Andhra Pradesh"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CountryId = 2,
+                            Name = "New York"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CountryId = 2,
+                            Name = "Buffalo"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CountryId = 3,
+                            Name = "Fukuoka"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CountryId = 3,
+                            Name = "Gumma"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CountryId = 3,
+                            Name = "Aichi"
+                        });
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.StatusType", b =>
@@ -254,6 +388,29 @@ namespace CorePoint.DAL.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "1",
+                            Name = "Admin",
+                            NormalizedName = "Admin"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "2",
+                            Name = "Supervisior",
+                            NormalizedName = "Supervisior"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "3",
+                            Name = "Employee",
+                            NormalizedName = "Employee"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -410,6 +567,13 @@ namespace CorePoint.DAL.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("AspNetUserRoles");
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = "b74ddd14-6340-4840-95c2-db12554843e5",
+                            RoleId = "1"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
@@ -483,6 +647,35 @@ namespace CorePoint.DAL.Migrations
                     b.HasIndex("CrewId");
 
                     b.HasDiscriminator().HasValue("Employee");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "b74ddd14-6340-4840-95c2-db12554843e5",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a3fa1cb6-b751-49f3-a4e8-c378dac77937",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = false,
+                            LockoutEnabled = false,
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN@GMAIL.COM",
+                            PasswordHash = "AQAAAAEAACcQAAAAELJKhJjnuOPhUnB/cGLXXRIVIJ2UELzt9yexx1eK8D9FcHB3pzeCzpJ2JsYyw/VqCw==",
+                            PhoneNumber = "1234567890",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "0b395d6e-59aa-476c-8043-d0bc5591d4fa",
+                            TwoFactorEnabled = false,
+                            UserName = "admin@gmail.com",
+                            AddressId = 1,
+                            Blood = 0,
+                            CreateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            CrewId = 1,
+                            DOB = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            Gender = 0,
+                            HireDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            IsActive = false,
+                            IsSupervisior = false,
+                            UpdateDate = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified)
+                        });
                 });
 
             modelBuilder.Entity("CorePoint.DAL.Models.Address", b =>

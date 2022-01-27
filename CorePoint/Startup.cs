@@ -24,13 +24,15 @@ namespace CorePoint
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(Configuration.GetConnectionString("ConString")));
-            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
+            services.Configure<PasswordHasherOptions>(options => options.CompatibilityMode = PasswordHasherCompatibilityMode.IdentityV2);
+            services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationContext>().AddDefaultTokenProviders();
             services.AddScoped<ICountryServices, CountryServices>();
             services.AddScoped<IAccountServices, AccountServices>();
             services.AddScoped<IStateServices, StateServices>();
             services.AddScoped<ICityServices, CityServices>();
             services.AddScoped<ICrewsServices, CrewsServices>();
             services.AddScoped<IEmployeeServices, EmployeeServices>();
+            services.AddScoped<IAddressServices, AddressServices>();
             services.AddControllersWithViews();
         }
 

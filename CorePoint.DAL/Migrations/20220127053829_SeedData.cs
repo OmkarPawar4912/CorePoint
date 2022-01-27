@@ -1,9 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CorePoint.DAL.Migrations
 {
-    public partial class InitDB : Migration
+    public partial class SeedData : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -145,11 +145,11 @@ namespace CorePoint.DAL.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    AddressLine = table.Column<string>(nullable: true),
+                    AddressLine = table.Column<string>(maxLength: 50, nullable: false),
                     CityId = table.Column<int>(nullable: false),
                     StateId = table.Column<int>(nullable: false),
                     CountryId = table.Column<int>(nullable: false),
-                    ZipCode = table.Column<int>(maxLength: 6, nullable: false)
+                    ZipCode = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -338,6 +338,75 @@ namespace CorePoint.DAL.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "3", "3", "Employee", "Employee" },
+                    { "1", "1", "Admin", "Admin" },
+                    { "2", "2", "Supervisior", "Supervisior" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cities",
+                columns: new[] { "Id", "Name", "StateId" },
+                values: new object[,]
+                {
+                    { 7, "Sapporo", 5 },
+                    { 6, "Queens", 4 },
+                    { 1, "Sangli", 1 },
+                    { 4, "Bronx", 4 },
+                    { 3, "Kolhapur", 1 },
+                    { 2, "Miraj", 1 },
+                    { 5, "Kings", 4 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Countries",
+                columns: new[] { "Id", "Name" },
+                values: new object[,]
+                {
+                    { 1, "India" },
+                    { 2, "USA" },
+                    { 3, "Japan" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Crews",
+                columns: new[] { "ID", "Code", "CreateBy", "CreateDate", "Name", "Sitecode", "UpdateBy", "UpdateDate" },
+                values: new object[] { 1, "N/A", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), "N/A", "N/A", null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "States",
+                columns: new[] { "Id", "CountryId", "Name" },
+                values: new object[,]
+                {
+                    { 1, 1, "Maharatra" },
+                    { 2, 1, "Goa" },
+                    { 3, 1, "Andhra Pradesh" },
+                    { 4, 2, "New York" },
+                    { 5, 2, "Buffalo" },
+                    { 6, 3, "Fukuoka" },
+                    { 7, 3, "Gumma" },
+                    { 8, 3, "Aichi" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Addresses",
+                columns: new[] { "Id", "AddressLine", "CityId", "CountryId", "StateId", "ZipCode" },
+                values: new object[] { 1, "N/A", 1, 1, 1, 0 });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "AddressId", "Blood", "CreateBy", "CreateDate", "CrewId", "DOB", "EmergencyPhoneNumber", "FullName", "Gender", "HireDate", "IsActive", "IsSupervisior", "UpdateBy", "UpdateDate" },
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "a3fa1cb6-b751-49f3-a4e8-c378dac77937", "Employee", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAELJKhJjnuOPhUnB/cGLXXRIVIJ2UELzt9yexx1eK8D9FcHB3pzeCzpJ2JsYyw/VqCw==", "1234567890", false, "0b395d6e-59aa-476c-8043-d0bc5591d4fa", false, "admin@gmail.com", 1, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "UserId", "RoleId" },
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", "1" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Addresses_CityId",

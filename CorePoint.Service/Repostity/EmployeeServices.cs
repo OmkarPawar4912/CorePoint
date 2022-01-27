@@ -8,11 +8,11 @@ namespace CorePoint.Service.Repostity
 {
     public class EmployeeServices : IEmployeeServices
     {
-        public void Dispose()
+        private readonly IAddressServices _addressServices;
+        public EmployeeServices(IAddressServices addressServices)
         {
-            //throw new System.NotImplementedException();
+            _addressServices = addressServices;
         }
-
         public List<SelectListItem> GetddlBoold()
         {
             var blood = new List<SelectListItem>
@@ -30,6 +30,10 @@ namespace CorePoint.Service.Repostity
             }
 
             return blood;
+        }
+        public void Dispose()
+        {
+            //throw new System.NotImplementedException();
         }
     }
 }
