@@ -26,7 +26,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // GET: Admin/Incidents
         public IActionResult Index()
         {
-           return View(_incidentServices.GetAllCases());
+            return View(_incidentServices.GetAllCases());
         }
 
         // GET: Admin/Incidents/Details/5

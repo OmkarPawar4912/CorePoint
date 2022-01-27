@@ -1,7 +1,7 @@
 ﻿using CorePoint.DAL.Data;
 using CorePoint.DAL.Models;
-using CorePoint.Service.ViewModel;
 using CorePoint.Service.Interfaces;
+using CorePoint.Service.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,21 +40,21 @@ namespace CorePoint.Service.Repostity
         public List<ViewModelIncidentStatus> GetAllCases()
         {
             var result = (from a in _context.Incidents
-                         let sample = _context.IncidentStatuses.Where(x=>x.IncidentID==a.Id).OrderByDescending(c => c.CreateDate).FirstOrDefault()
-                         select new ViewModelIncidentStatus
-                         {
-                            vmId=a.Id,
-                            vmIncidentDate=a.IncidentDate,
-                            vmIncidentType=a.IncidentType,
-                            vmIncidentReportDate=a.CreateDate,
-                            vmLateststatus=sample.StatusType.Name,
-                             vmServertiy = a.Severity.ToString(),
-                            vmSupervisorName=a.SupervisorUserName,
-                            vmCrewEmail=a.EmailId
-                         }).ToList();
+                          let sample = _context.IncidentStatuses.Where(x => x.IncidentID == a.Id).OrderByDescending(c => c.CreateDate).FirstOrDefault()
+                          select new ViewModelIncidentStatus
+                          {
+                              vmId = a.Id,
+                              vmIncidentDate = a.IncidentDate,
+                              vmIncidentType = a.IncidentType,
+                              vmIncidentReportDate = a.CreateDate,
+                              vmLateststatus = sample.StatusType.Name,
+                              vmServertiy = a.Severity.ToString(),
+                              vmSupervisorName = a.SupervisorUserName,
+                              vmCrewEmail = a.EmailId
+                          }).ToList();
             return result;
         }
-     
+
         public void Delete(int? id)
         {
             throw new NotImplementedException();

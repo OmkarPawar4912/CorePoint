@@ -2,7 +2,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System;
 
 namespace CorePoint.DAL.Data
 {
@@ -25,10 +24,10 @@ namespace CorePoint.DAL.Data
         private void SeedIncidentStatus(ModelBuilder builder)
         {
             builder.Entity<StatusType>().HasData(
-                new StatusType() { ID=1, Name= "Initiated" },
-                new StatusType() { ID=2, Name= "InProgress" },
-                new StatusType() { ID=3, Name= "Complete" },
-                new StatusType() { ID=4, Name= "Rejected" }
+                new StatusType() { ID = 1, Name = "Initiated" },
+                new StatusType() { ID = 2, Name = "InProgress" },
+                new StatusType() { ID = 3, Name = "Complete" },
+                new StatusType() { ID = 4, Name = "Rejected" }
                  );
         }
 
