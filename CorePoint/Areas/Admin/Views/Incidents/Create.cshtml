@@ -1,85 +1,97 @@
 ﻿@model CorePoint.DAL.Models.Incident
-
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>Incident</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="SupervisorId" class="control-label"></label>
-                <input asp-for="SupervisorId" class="form-control" />
-                <span asp-validation-for="SupervisorId" class="text-danger"></span>
+<form asp-action="Create">
+    <div class="pagetitle">
+        <div class="card">
+            <div class="card-body-head">
+                <div class="float-left">
+                    <h5 class="card-title">Create Incident</h5>
+                </div>
+                <div class="float-right">
+                </div>
             </div>
-            <div class="form-group">
-                <label asp-for="CrewId" class="control-label"></label>
-                <input asp-for="CrewId" class="form-control" />
-                <span asp-validation-for="CrewId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="IncidentType" class="control-label"></label>
-                <input asp-for="IncidentType" class="form-control" />
-                <span asp-validation-for="IncidentType" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Area" class="control-label"></label>
-                <input asp-for="Area" class="form-control" />
-                <span asp-validation-for="Area" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="FilePath" class="control-label"></label>
-                <input asp-for="FilePath" class="form-control" />
-                <span asp-validation-for="FilePath" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Severity" class="control-label"></label>
-                <select asp-for="Severity" class="form-control"></select>
-                <span asp-validation-for="Severity" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
-                <label class="form-check-label">
-                    <input class="form-check-input" asp-for="IsConfidence" /> @Html.DisplayNameFor(model => model.IsConfidence)
-                </label>
-            </div>
-            <div class="form-group">
-                <label asp-for="IncidentDate" class="control-label"></label>
-                <input asp-for="IncidentDate" class="form-control" />
-                <span asp-validation-for="IncidentDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateBy" class="control-label"></label>
-                <input asp-for="CreateBy" class="form-control" />
-                <span asp-validation-for="CreateBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="CreateDate" class="control-label"></label>
-                <input asp-for="CreateDate" class="form-control" />
-                <span asp-validation-for="CreateDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdateBy" class="control-label"></label>
-                <input asp-for="UpdateBy" class="form-control" />
-                <span asp-validation-for="UpdateBy" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="UpdateDate" class="control-label"></label>
-                <input asp-for="UpdateDate" class="form-control" />
-                <span asp-validation-for="UpdateDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
-</div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body m-3">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label asp-for="Severity" class="control-label"></label>
+                                    <select asp-for="Severity" class="form-control" asp-items="ViewBag.SeverityList"></select>
+                                    <span asp-validation-for="Severity" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label asp-for="IncidentType" class="control-label"></label>
+                                    <select asp-for="IncidentType" class="form-control" asp-items="ViewBag.IncidentList"></select>
+                                    <span asp-validation-for="IncidentType" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label asp-for="SupervisorUserName" class="control-label"></label>
+                                    @Html.DropDownListFor(Model => Model.SupervisorUserName, new SelectList(ViewBag.SupervisorList, "Email", "FullName"),
+                                    "-- Select Supervisor --", new { id = "ddlSupervisor", @class="form-control"})
+                                    <span asp-validation-for="SupervisorUserName" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label asp-for="EmailId" class="control-label"></label>
+                                    @Html.DropDownListFor(Model => Model.EmailId, new SelectList(ViewBag.EmpList, "Email", "FullName"),
+                                    "-- Select Employee --", new { id = "ddlEmployee", @class="form-control"})
+                                    <span asp-validation-for="EmailId" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label asp-for="Shift" class="control-label"></label>
+                                    <select asp-for="Shift" class="form-control" asp-items="ViewBag.ShiftList"></select>
+                                    <span asp-validation-for="Shift" class="text-danger"></span>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <label asp-for="FilePath" class="control-label"></label>
+                                    <input asp-for="FilePath" class="form-control" />
+                                    <span asp-validation-for="FilePath" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                      <div class="form-group mb-2">
+                                    <label asp-for="IncidentDate" class="control-label"></label>
+                                    <input asp-for="IncidentDate" class="form-control" />
+                                    <span asp-validation-for="IncidentDate" class="text-danger"></span>
+                                </div>
 
+                                <div class="form-group mb-2">
+                                    <label asp-for="Area" class="control-label"></label>
+                                    <input asp-for="Area" class="form-control" />
+                                    <span asp-validation-for="Area" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <label asp-for="Description" class="control-label"></label>
+                                    <textarea asp-for="Description" class="form-control" ></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+                          
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group mb-2">
+                                    <input type="submit" value="Create" class="btn btn-primary m-4" />
+                                    <a asp-action="Index" class="btn btn-secondary">Back</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+<!-----------
+
+
+
+-->

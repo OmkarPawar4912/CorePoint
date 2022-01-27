@@ -7,117 +7,35 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CorePoint.DAL.Data;
 using CorePoint.DAL.Models;
+using CorePoint.Service.Interfaces;
 
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
     public class IncidentsController : Controller
     {
+        private readonly IEmployeeServices _employeeServices;
+        private readonly ICrewsServices _crewsServices;
+        private readonly IIncidentServices _incidentServices;
         private readonly ApplicationContext _context;
 
-        public IncidentsController(ApplicationContext context)
+        public IncidentsController(ApplicationContext context, IEmployeeServices employeeServices, ICrewsServices crewsServices, IIncidentServices incidentServices)
         {
             _context = context;
+            _employeeServices = employeeServices;
+            _crewsServices = crewsServices;
+            _incidentServices = incidentServices;
         }
 
         // GET: Admin/Incidents
         public async Task<IActionResult> Index()
         {
+             
             return View(await _context.Incidents.ToListAsync());
         }
 
         // GET: Admin/Incidents/Details/5
         public async Task<IActionResult> Details(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var incident = await _context.Incidents.FirstOrDefaultAsync(m => m.Id == id);
-            if (incident == null)
-            {
-                return NotFound();
-            }
-
-            return View(incident);
-        }
-
-        // GET: Admin/Incidents/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Admin/Incidents/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,SupervisorId,CrewId,IncidentType,Area,FilePath,Severity,IsConfidence,IncidentDate,CreateBy,CreateDate,UpdateBy,UpdateDate")] Incident incident)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(incident);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(incident);
-        }
-
-        // GET: Admin/Incidents/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var incident = await _context.Incidents.FindAsync(id);
-            if (incident == null)
-            {
-                return NotFound();
-            }
-            return View(incident);
-        }
-
-        // POST: Admin/Incidents/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,SupervisorId,CrewId,IncidentType,Area,FilePath,Severity,IsConfidence,IncidentDate,CreateBy,CreateDate,UpdateBy,UpdateDate")] Incident incident)
-        {
-            if (id != incident.Id)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(incident);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!IncidentExists(incident.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(incident);
-        }
-
-        // GET: Admin/Incidents/Delete/5
-        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -134,20 +52,37 @@ namespace CorePoint.Areas.Admin.Controllers
             return View(incident);
         }
 
-        // POST: Admin/Incidents/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        // GET: Admin/Incidents/Create
+        public IActionResult Create()
         {
-            var incident = await _context.Incidents.FindAsync(id);
-            _context.Incidents.Remove(incident);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            AllddlBind();
+            return View();
+        }
+        public void AllddlBind()
+        {
+            ViewBag.EmpList = _employeeServices.GetddlEmplList();
+            ViewBag.ShiftList = _employeeServices.GetddlShift();
+            ViewBag.SupervisorList = _employeeServices.GetddlSupervisorList();
+            ViewBag.SeverityList = _employeeServices.GetddlSeverityList();
+            ViewBag.IncidentList = _employeeServices.GetddlIncidentList();
+        }
+        // POST: Admin/Incidents/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create([Bind("Id,SupervisorUserName,EmailId,Shift,IncidentType,Area,Description,FilePath,Severity,IncidentDate")] Incident incident)
+        {
+            
+            if (ModelState.IsValid)
+            {
+                _incidentServices.CreateIncident(incident);
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                AllddlBind();
+            }
+            return View(incident);
         }
 
-        private bool IncidentExists(int id)
-        {
-            return _context.Incidents.Any(e => e.Id == id);
-        }
     }
 }

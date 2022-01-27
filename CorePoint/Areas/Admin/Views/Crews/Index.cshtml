@@ -17,21 +17,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Code)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Sitecode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreateDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UpdateDate)
-            </th>
             <th></th>
         </tr>
     </thead>
@@ -43,21 +28,6 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Code)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Sitecode)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreateDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.UpdateDate)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |

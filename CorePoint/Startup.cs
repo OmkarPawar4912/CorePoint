@@ -35,6 +35,7 @@ namespace CorePoint
             services.AddScoped<ICrewsServices, CrewsServices>();
             services.AddScoped<IEmployeeServices, EmployeeServices>();
             services.AddScoped<IAddressServices, AddressServices>();
+            services.AddScoped<IIncidentServices, IncidentServices>();
             services.AddControllersWithViews();
 
             services.Configure<IdentityOptions>(options =>

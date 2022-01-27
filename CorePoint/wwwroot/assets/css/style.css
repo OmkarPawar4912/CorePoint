@@ -1237,6 +1237,9 @@ h1, h2, h3, h4, h5, h6 {
         color: #012970;
     }
 /*****************/
+.card-body-table {
+    padding: 18px 0px 0px 0px;
+}
 .rbtnlbl {
     margin-right: 20px;
 }

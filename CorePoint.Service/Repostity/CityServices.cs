@@ -23,7 +23,7 @@ namespace CorePoint.Service.Repostity
                 Name = s.Name,
                 StateId = s.StateId,
                 StateName = _context.States.Where(x => x.Id == s.StateId).FirstOrDefault().Name
-            }).ToList();
+            }).ToList().OrderBy(x=>x.Name);
         }
 
         public ViewModelCity GetDetailsById(int? id)

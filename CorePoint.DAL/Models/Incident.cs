@@ -9,10 +9,10 @@ namespace CorePoint.DAL.Models
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required]
-        public int SupervisorId { get; set; }
-        [Required]
-        public int CrewId { get; set; }
+        [Display(Name = "Employee")]
+        public string EmailId { get; set; }
+        [Display(Name = "Supervisor")]
+        public string SupervisorUserName { get; set; }
         [Required]
         [Display(Name = "Shift")]
         public Shift Shift { get; set; }
@@ -24,7 +24,6 @@ namespace CorePoint.DAL.Models
         [Display(Name = "Uploade File")]
         public string FilePath { get; set; }
         public Servertiy Severity { get; set; }
-        public Boolean IsConfidence { get; set; } = false;
         [Required]
         [Display(Name = "Incident Date")]
         public DateTime IncidentDate { get; set; }

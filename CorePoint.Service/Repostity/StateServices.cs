@@ -23,7 +23,7 @@ namespace CorePoint.Service.Repostity
                 Name = s.Name,
                 CountryId = s.CountryId,
                 CountryName = _context.Countries.Where(x => x.Id == s.CountryId).FirstOrDefault().Name
-            }).ToList();
+            }).ToList().OrderBy(x => x.Name);
         }
 
         public ViewModelState GetDetailsById(int? id)
@@ -56,7 +56,7 @@ namespace CorePoint.Service.Repostity
         }
         public IList<State> GetStatesByCountryId(int countryId)
         {
-            return _context.States.Where(m => m.CountryId == countryId).ToList();
+            return _context.States.Where(m => m.CountryId == countryId).OrderBy(x => x.Name).ToList();
         }
 
         public void Dispose()

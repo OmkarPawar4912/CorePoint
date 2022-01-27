@@ -30,13 +30,9 @@ namespace CorePoint.Controllers
                 var result = await _accountServices.PasswordSignInAsync(modelLogin);
                 if (result.Succeeded)
                 {
-                    if (User.IsInRole("Admin"))
+                    if ("admin@gmail.com"==modelLogin.Email.ToLower())
                     {
                         return LocalRedirect("~/Admin/Home/Index");
-                    }
-                    else if (User.IsInRole("Supervisior"))
-                    {
-                        return LocalRedirect("~/Home/ComingSoon");
                     }
                     else
                     {

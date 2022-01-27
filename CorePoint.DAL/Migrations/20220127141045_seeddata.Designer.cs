@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorePoint.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220127110302_SeedData")]
-    partial class SeedData
+    [Migration("20220127141045_seeddata")]
+    partial class seeddata
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -222,10 +222,14 @@ namespace CorePoint.DAL.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("CrewId")
-                        .HasColumnType("int");
+                    b.Property<string>("CrewUserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("EmailId")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("FilePath")
@@ -247,8 +251,9 @@ namespace CorePoint.DAL.Migrations
                     b.Property<int>("Shift")
                         .HasColumnType("int");
 
-                    b.Property<int>("SupervisorId")
-                        .HasColumnType("int");
+                    b.Property<string>("SupervisorUserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UpdateBy")
                         .HasColumnType("nvarchar(max)");
@@ -662,16 +667,16 @@ namespace CorePoint.DAL.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "716a9d19-5d48-49f0-b51d-ead82c6781c9",
+                            ConcurrencyStamp = "f4fb0a94-6c0c-4305-814b-28358661e2f6",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEIzfx7MwPRC/cJpH16miThgiI47kqumXxyK8TaKY1X7B4JEb/ARk47MvyXriGv+dIA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMnWCFvL1cjVvahBWfKdtIZapTeYMoAh9fOqeHCpyHpzk8g8UPmcOIrGbfB/JtzNBw==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "9cee51d6-191f-409c-8d3f-9d34a2ac6b91",
+                            SecurityStamp = "1062f659-22d2-41bc-baee-ab5856dceff5",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             AddressId = 1,

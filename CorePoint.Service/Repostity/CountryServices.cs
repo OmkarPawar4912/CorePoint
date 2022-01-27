@@ -21,7 +21,7 @@ namespace CorePoint.Service.Repostity
             {
                 Id = s.Id,
                 Name = s.Name
-            }).ToList();
+            }).ToList().OrderBy(x => x.Name);
         }
 
         public IEnumerable<Country> GetListCountry()
@@ -60,7 +60,7 @@ namespace CorePoint.Service.Repostity
 
         public IList<Country> GetCountryList()
         {
-            return _context.Countries.ToList();
+            return _context.Countries.OrderBy(x => x.Name).ToList();
         }
 
         public void Dispose()
