@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorePoint.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220127053829_SeedData")]
+    [Migration("20220127100907_SeedData")]
     partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -655,16 +655,16 @@ namespace CorePoint.DAL.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a3fa1cb6-b751-49f3-a4e8-c378dac77937",
+                            ConcurrencyStamp = "ec2db771-b7f9-40ba-a061-312e8bc07b53",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAELJKhJjnuOPhUnB/cGLXXRIVIJ2UELzt9yexx1eK8D9FcHB3pzeCzpJ2JsYyw/VqCw==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEP18yF5/NaOQf6HD5Ue5LmeKGkkpc97qXg0Y89oLAwr4NujTiwKy7AIAagZFkFeIfg==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "0b395d6e-59aa-476c-8043-d0bc5591d4fa",
+                            SecurityStamp = "20d94e67-bcf9-4a74-8ff4-c7f8d9c2d657",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             AddressId = 1,

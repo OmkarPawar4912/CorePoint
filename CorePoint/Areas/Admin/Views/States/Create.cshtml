@@ -1,38 +1,40 @@
 ﻿@model CorePoint.DAL.Models.State
-
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>State</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="pagetitle">
+    <div class="card">
+        <div class="card-body-head">
+            <div class="float-left">
+                <h5 class="card-title">Create State</h5>
             </div>
-            <div class="form-group">
-                <label asp-for="CountryId" class="control-label"></label>
-                <input asp-for="CountryId" class="form-control" />
-                <span asp-validation-for="CountryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row mt-4">
+                        <div class="col-md-3 mb-2">
+                            <label asp-for="CountryId" class="control-label"></label>
+                            @Html.DropDownListFor(Model => Model.CountryId, new SelectList(ViewBag.CountryList, "Id", "Name"),
+                            "-- Select Country --", new { id = "ddCountry", @class="form-control"})
+                            <span asp-validation-for="CountryId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col mt-4">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-secondary">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+ @section Scripts{
+ @{  await Html.RenderPartialAsync("_ValidationScriptsPartial");   }}

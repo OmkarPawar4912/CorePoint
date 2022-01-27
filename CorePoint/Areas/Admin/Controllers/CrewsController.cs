@@ -1,5 +1,6 @@
 ﻿using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -7,6 +8,7 @@ using System.Linq;
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CrewsController : Controller
     {
         private readonly ICrewsServices _crewsServices;

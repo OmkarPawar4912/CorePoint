@@ -1,24 +1,32 @@
 ﻿@model CorePoint.Service.ViewModel.ViewModelCountries
 
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
-<div>
-    <h4>Country</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Name)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Name)
-        </dd>
-    </dl>
+<div class="pagetitle">
+    <div class="card">
+        <div class="card-body-head">
+            <div class="float-left">
+                <h5 class="card-title">Country Details</h5>
+            </div>
+            <div class="float-right">
+                <input type="submit" value="Edit" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-action="Index"> Back to List </a>
+            </div>
+        </div>
+    </div>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <div class="row mt-4">
+                    <div class="col-md-1">
+                        <strong> @Html.DisplayNameFor(model => model.Name) </strong>
+                    </div>
+                    <div class="col-md-3 mb-2">
+                        @Html.DisplayFor(model => model.Name)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

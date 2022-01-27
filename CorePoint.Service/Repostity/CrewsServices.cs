@@ -18,7 +18,7 @@ namespace CorePoint.Service.Repostity
 
         public IEnumerable<ViewModelCrews> GetList()
         {
-            return _context.Crews.Select(s => new ViewModelCrews
+            return _context.Crews.Where(x=>x.ID!=1).Select(s => new ViewModelCrews
             {
                 ID = s.ID,
                 Name = s.Name,
@@ -62,7 +62,7 @@ namespace CorePoint.Service.Repostity
 
         public IEnumerable<ViewModelCrews> GetddlCrews()
         {
-            return _context.Crews.Select(s => new ViewModelCrews
+            return _context.Crews.Where(x => x.ID != 1).Select(s => new ViewModelCrews
             {
                 ID = s.ID,
                 Name = s.Name

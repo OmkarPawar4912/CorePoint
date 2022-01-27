@@ -34,9 +34,12 @@
                 @Html.DisplayFor(modelItem => item.CountryName)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+              <a href="@Url.Action("Edit", new { id = item.Id })" class="btn btn-sm btn-success">
+                                            <i class="bi bi-pencil-square"></i>
+                                        </a> |
+                                        <a href="@Url.Action("Delete", new { id = item.Id })" class="btn btn-sm btn-danger" onclick="return confirm ('Are you sure want to delete ?');">
+                                            <i class="bi bi-trash-fill"></i>
+                                        </a>
             </td>
         </tr>
 }

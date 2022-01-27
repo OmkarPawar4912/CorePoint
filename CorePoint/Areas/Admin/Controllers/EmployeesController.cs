@@ -1,5 +1,6 @@
 ﻿using CorePoint.Service.Interfaces;
 using CorePoint.Service.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Linq;
@@ -8,6 +9,7 @@ using System.Threading.Tasks;
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class EmployeesController : Controller
     {
         private readonly IEmployeeServices _employeeServices;

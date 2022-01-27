@@ -39,7 +39,12 @@ namespace CorePoint.Service.Repostity
 
         public void EditCity(City city)
         {
-            _context.Update(city);
+            var originalData = _context.Cities.Where(w => w.Id == city.Id).FirstOrDefault();
+            if (originalData != null)
+            {
+                originalData.Name = city.Name;
+            };
+            _context.Update(originalData);
             _context.SaveChanges();
         }
 

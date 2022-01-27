@@ -1,0 +1,86 @@
+﻿@import url(https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700&display=swap);
+
+html {
+    min-height: 100%;
+    background-image: url(https://d3gvybjp3zjp3i.cloudfront.net/wp-content/uploads/2017/08/Safety-in-Mining.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+-webkit-background-size: cover;
+-moz-background-size: cover;
+-o-background-size: cover;
+
+@media only screen and (max-width: 767px) {
+    html{
+    background-image: url(smaller-image.jpg);
+}}
+
+body {
+    font-family: Mulish, sans-serif;
+   /* background-color: #f8faff; */
+}
+
+:root {
+    --text-color: #181339;
+}
+
+.center {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    padding: 10px;
+}
+
+.front {
+    display: -webkit-inline-box;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+   
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 70px 75px;
+    border-radius: 10px;
+}
+
+    .front h1 {
+        text-align: center;
+        font-size: 54px;
+        margin-bottom: 30px;
+        color: var(--text-color);
+    }
+
+    .front p {
+        line-height: 26px;
+        font-size: 16px;
+        color: var(--text-color);
+        text-align: center;
+        font-weight: 700;
+        margin-bottom: 50px;
+    }
+
+    .front .button_group {
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+    }
+
+        .front .button_group a {
+            text-decoration: none;
+            padding: 15px 30px;
+            color: var(--text-color);
+            border: 1px solid #22185e;
+            border-radius: 5px;
+            font-weight: 500;
+        }
+
+            .front .button_group a + a {
+                margin-left: 35px;
+            }

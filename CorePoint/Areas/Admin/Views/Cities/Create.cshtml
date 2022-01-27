@@ -1,38 +1,68 @@
 ﻿@model CorePoint.Service.ViewModel.ViewModelCity
 
-@{
-    ViewData["Title"] = "Create";
-}
-
-<h1>Create</h1>
-
-<h4>City</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Create">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+<div class="pagetitle">
+    <div class="card">
+        <div class="card-body-head">
+            <div class="float-left">
+                <h5 class="card-title">Create City</h5>
             </div>
-            <div class="form-group">
-                <label asp-for="StateId" class="control-label"></label>
-                <input asp-for="StateId" class="form-control" />
-                <span asp-validation-for="StateId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+<section class="section">
+    <div class="row">
+        <div class="card">
+            <div class="card-body">
+                <form asp-action="Create">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row mt-4">
+                        <div class="col-md-3 mb-2">
+                            <label asp-for="CountryId" class="control-label"></label>
+                            @Html.DropDownListFor(Model => Model.CountryId, new SelectList(ViewBag.CountryList, "Id", "Name"),
+                            "-- Select Country --", new { id = "ddCountry", @class="form-control"})
+                            <span asp-validation-for="CountryId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3 mb-2">
+                            <label asp-for="StateId" class="control-label"></label>
+                            @Html.DropDownListFor(Model => Model.StateId, new SelectList(Enumerable.Empty<SelectListItem>(), "Id", "Name"),
+                            "-- Select State --", new { id = "ddState",@class="form-control" })
+                            <span asp-validation-for="StateId" class="text-danger"></span>
+                        </div>
+                        <div class="col-md-3">
+                            <label asp-for="Name" class="control-label"></label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
+                        <div class="col mt-4">
+                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <a asp-action="Index" class="btn btn-secondary">Back</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="~/lib/jquery/dist/jquery.js"></script>
+<script>
+    $(document).ready(function () {
+               $("#ddCountry").change(function () {
+                   var id = $(this).val();
+                   $("#ddState").empty();
+                   $.get("../Employees/GetStateByCountryId", { countryId: id }, function (data) {
+                       var v = "<option>-- Select Distric --</option>";
+                       $.each(data, function (i, v1) {
+                           v += "<option value=" + v1.value + ">" + v1.text + "</option>";
+                       });
+                       $("#ddState").html(v);
+                   });
+               });
+     });
 
+</script>
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
 }

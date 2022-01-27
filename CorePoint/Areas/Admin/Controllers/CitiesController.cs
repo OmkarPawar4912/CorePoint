@@ -1,5 +1,6 @@
 ﻿using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -7,13 +8,16 @@ using System.Linq;
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class CitiesController : Controller
     {
         private readonly ICityServices _cityServices;
+        private readonly ICountryServices _countryServices;
 
-        public CitiesController(ICityServices cityServices)
+        public CitiesController(ICityServices cityServices, ICountryServices countryServices)
         {
             _cityServices = cityServices;
+            _countryServices = countryServices;
         }
 
         // GET: Admin/Cities
@@ -42,12 +46,11 @@ namespace CorePoint.Areas.Admin.Controllers
         // GET: Admin/Cities/Create
         public IActionResult Create()
         {
+            ViewBag.CountryList = _countryServices.GetCountryList();
             return View();
         }
 
         // POST: Admin/Cities/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,Name,StateId")] City city)
@@ -77,11 +80,9 @@ namespace CorePoint.Areas.Admin.Controllers
         }
 
         // POST: Admin/Cities/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Name,StateId")] City city)
+        public IActionResult Edit(int id, [Bind("Id,Name")] City city)
         {
             if (id != city.Id)
             {

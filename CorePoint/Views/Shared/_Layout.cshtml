@@ -39,7 +39,7 @@
   <header id="header" class="header fixed-top d-flex align-items-center">
 
     <div class="d-flex align-items-center justify-content-between">
-      <a  asp-area="Admin" asp-controller="Admin" asp-action="Index" class="logo d-flex align-items-center">       
+      <a  asp-action="Index" class="logo d-flex align-items-center">       
         <span class="d-none d-lg-block">CorePoint</span>
       </a>
       <i class="bi bi-list toggle-sidebar-btn"></i>
@@ -113,41 +113,17 @@
             </a>
           </li>
           <li>
-            <a asp-controller="Employees" asp-action="Create" >
+            <a asp-controller="Employees" asp-action="Index" >
               <i class="bi bi-circle"></i><span>Employees</span>
             </a>
           </li>
         </ul>
       </li><!-- End Master Nav -->
-
-      <li class="nav-item">
-        <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
-          <i class="bi bi-journal-text"></i><span>Reports</span><i class="bi bi-chevron-down ms-auto"></i>
-        </a>
-        <ul id="forms-nav" class="nav-content collapse " data-bs-parent="#sidebar-nav">
-          <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="UserDetails" >
-              <i class="bi bi-circle"></i><span>Plan</span>
+         <li  class="nav-item">
+            <a asp-controller="Incidents" asp-area="Admin" asp-action="Index" >
+              <i class="bi bi-circle"></i><span>States</span>
             </a>
           </li>
-          <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="UserDetails" >
-              <i class="bi bi-circle"></i><span>Traniner</span>
-            </a>
-          </li>
-          <li>
-            <a asp-area="Admin" asp-controller="Admin" asp-action="UserDetails">
-              <i class="bi bi-circle"></i><span>User</span>
-            </a>
-          </li>
-          <li>
-            <a href="forms-validation.html">
-              <i class="bi bi-circle"></i><span>WorkoutDays</span>
-            </a>
-          </li>
-        </ul>
-      </li><!-- End Report Nav -->
-
     </ul>
 
   </aside><!-- End Sidebar-->

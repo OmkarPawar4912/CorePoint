@@ -1,5 +1,6 @@
 ﻿using CorePoint.Service.Interfaces;
 using CorePoint.Service.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 
@@ -12,11 +13,14 @@ namespace CorePoint.Controllers
         {
             _accountServices = accountServices;
         }
+
+        [AllowAnonymous]
         public IActionResult Login()
         {
             return View();
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("Login")]
         public async Task<IActionResult> Login([Bind("Email,Password")] ViewModelLogin modelLogin)
@@ -25,18 +29,18 @@ namespace CorePoint.Controllers
             {
                 var result = await _accountServices.PasswordSignInAsync(modelLogin);
                 if (result.Succeeded)
-                { 
+                {
                     if (User.IsInRole("Admin"))
                     {
-                        return RedirectToAction("Index", "Home", new { Areas = "Admin" });
+                        return LocalRedirect("~/Admin/Home/Index");
                     }
-                    else if (User.IsInRole("Supervisor"))
+                    else if (User.IsInRole("Supervisior"))
                     {
-                        return Content("Supervisor");
+                        return LocalRedirect("~/Home/ComingSoon");
                     }
                     else
                     {
-                        return Content("User");
+                        return LocalRedirect("~/Home/ComingSoon");
                     }
                 }
                 else

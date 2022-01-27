@@ -1,5 +1,6 @@
 ﻿using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
@@ -8,12 +9,15 @@ using System.Threading.Tasks;
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class StatesController : Controller
     {
         private readonly IStateServices _stateServices;
-        public StatesController(IStateServices stateServices)
+        private readonly ICountryServices _countryServices;
+        public StatesController(IStateServices stateServices, ICountryServices countryServices)
         {
             _stateServices = stateServices;
+            _countryServices = countryServices;
         }
 
         // GET: Admin/States
@@ -43,12 +47,11 @@ namespace CorePoint.Areas.Admin.Controllers
         // GET: Admin/States/Create
         public IActionResult Create()
         {
+            ViewBag.CountryList = _countryServices.GetCountryList();
             return View();
         }
 
         // POST: Admin/States/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,Name,CountryId")] State state)
@@ -78,8 +81,6 @@ namespace CorePoint.Areas.Admin.Controllers
         }
 
         // POST: Admin/States/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, [Bind("Id,Name,CountryId")] State state)
