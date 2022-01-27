@@ -1,5 +1,4 @@
 ﻿using CorePoint.DAL.Enums;
-using CorePoint.DAL.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
 

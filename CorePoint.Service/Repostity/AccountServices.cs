@@ -73,7 +73,7 @@ namespace CorePoint.Service.Repostity
 
         public IEnumerable<ViewModelEmployee> GetList()
         {
-            return _applicationContext.Employees.Where(x=>x.Email!="admin@gmail.com").Select(s => new ViewModelEmployee
+            return _applicationContext.Employees.Where(x => x.Email != "admin@gmail.com").Select(s => new ViewModelEmployee
             {
                 Id = s.Id,
                 FullName = s.FullName,

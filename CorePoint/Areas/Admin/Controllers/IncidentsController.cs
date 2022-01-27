@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using CorePoint.DAL.Data;
+﻿using CorePoint.DAL.Data;
 using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Threading.Tasks;
 
 namespace CorePoint.Areas.Admin.Controllers
 {
@@ -30,7 +26,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // GET: Admin/Incidents
         public async Task<IActionResult> Index()
         {
-             
+
             return View(await _context.Incidents.ToListAsync());
         }
 
@@ -71,7 +67,7 @@ namespace CorePoint.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create([Bind("Id,SupervisorUserName,EmailId,Shift,IncidentType,Area,Description,FilePath,Severity,IncidentDate")] Incident incident)
         {
-            
+
             if (ModelState.IsValid)
             {
                 _incidentServices.CreateIncident(incident);

@@ -1,10 +1,10 @@
-﻿using CorePoint.DAL.Enums;
-using CorePoint.Service.ViewModel;
+﻿using CorePoint.DAL.Data;
+using CorePoint.DAL.Enums;
 using CorePoint.Service.Interfaces;
+using CorePoint.Service.ViewModel;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
-using CorePoint.DAL.Data;
 using System.Linq;
 
 namespace CorePoint.Service.Repostity

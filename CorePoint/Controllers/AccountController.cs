@@ -30,7 +30,7 @@ namespace CorePoint.Controllers
                 var result = await _accountServices.PasswordSignInAsync(modelLogin);
                 if (result.Succeeded)
                 {
-                    if ("admin@gmail.com"==modelLogin.Email.ToLower())
+                    if ("admin@gmail.com" == modelLogin.Email.ToLower())
                     {
                         return LocalRedirect("~/Admin/Home/Index");
                     }

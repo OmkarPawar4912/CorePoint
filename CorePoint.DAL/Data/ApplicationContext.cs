@@ -41,7 +41,7 @@ namespace CorePoint.DAL.Data
         }
         private void SeedAddress(ModelBuilder builder)
         {
-            builder.Entity<Address>().HasData(new Address { Id = 1, AddressLine = "N/A", CountryId = 1, StateId = 1,CityId=1 }) ;
+            builder.Entity<Address>().HasData(new Address { Id = 1, AddressLine = "N/A", CountryId = 1, StateId = 1, CityId = 1 });
         }
         private void SeedUsers(ModelBuilder builder)
         {
@@ -52,8 +52,8 @@ namespace CorePoint.DAL.Data
                 Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                 UserName = "admin@gmail.com",
                 Email = "admin@gmail.com",
-                NormalizedEmail= "ADMIN@GMAIL.COM",
-                NormalizedUserName= "ADMIN@GMAIL.COM",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                NormalizedUserName = "ADMIN@GMAIL.COM",
                 PasswordHash = hasher.HashPassword(null, "Admin@123"),
                 LockoutEnabled = false,
                 PhoneNumber = "1234567890",
