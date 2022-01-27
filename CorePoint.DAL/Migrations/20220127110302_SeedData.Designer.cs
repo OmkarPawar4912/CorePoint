@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorePoint.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220127100907_SeedData")]
+    [Migration("20220127110302_SeedData")]
     partial class SeedData
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -225,6 +225,9 @@ namespace CorePoint.DAL.Migrations
                     b.Property<int>("CrewId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Description")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("FilePath")
                         .HasColumnType("nvarchar(max)");
 
@@ -232,12 +235,16 @@ namespace CorePoint.DAL.Migrations
                         .HasColumnType("datetime2");
 
                     b.Property<string>("IncidentType")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsConfidence")
                         .HasColumnType("bit");
 
                     b.Property<int>("Severity")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Shift")
                         .HasColumnType("int");
 
                     b.Property<int>("SupervisorId")
@@ -655,16 +662,16 @@ namespace CorePoint.DAL.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ec2db771-b7f9-40ba-a061-312e8bc07b53",
+                            ConcurrencyStamp = "716a9d19-5d48-49f0-b51d-ead82c6781c9",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEP18yF5/NaOQf6HD5Ue5LmeKGkkpc97qXg0Y89oLAwr4NujTiwKy7AIAagZFkFeIfg==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEIzfx7MwPRC/cJpH16miThgiI47kqumXxyK8TaKY1X7B4JEb/ARk47MvyXriGv+dIA==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "20d94e67-bcf9-4a74-8ff4-c7f8d9c2d657",
+                            SecurityStamp = "9cee51d6-191f-409c-8d3f-9d34a2ac6b91",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             AddressId = 1,

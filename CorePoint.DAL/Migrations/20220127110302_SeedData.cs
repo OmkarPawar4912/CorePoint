@@ -75,8 +75,10 @@ namespace CorePoint.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SupervisorId = table.Column<int>(nullable: false),
                     CrewId = table.Column<int>(nullable: false),
-                    IncidentType = table.Column<string>(nullable: true),
+                    Shift = table.Column<int>(nullable: false),
+                    IncidentType = table.Column<string>(nullable: false),
                     Area = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
                     FilePath = table.Column<string>(nullable: true),
                     Severity = table.Column<int>(nullable: false),
                     IsConfidence = table.Column<bool>(nullable: false),
@@ -401,7 +403,7 @@ namespace CorePoint.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "AddressId", "Blood", "CreateBy", "CreateDate", "CrewId", "DOB", "EmergencyPhoneNumber", "FullName", "Gender", "HireDate", "IsActive", "IsSupervisior", "UpdateBy", "UpdateDate" },
-                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "ec2db771-b7f9-40ba-a061-312e8bc07b53", "Employee", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEP18yF5/NaOQf6HD5Ue5LmeKGkkpc97qXg0Y89oLAwr4NujTiwKy7AIAagZFkFeIfg==", "1234567890", false, "20d94e67-bcf9-4a74-8ff4-c7f8d9c2d657", false, "admin@gmail.com", 1, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "716a9d19-5d48-49f0-b51d-ead82c6781c9", "Employee", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEIzfx7MwPRC/cJpH16miThgiI47kqumXxyK8TaKY1X7B4JEb/ARk47MvyXriGv+dIA==", "1234567890", false, "9cee51d6-191f-409c-8d3f-9d34a2ac6b91", false, "admin@gmail.com", 1, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

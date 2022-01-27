@@ -34,8 +34,7 @@ namespace CorePoint.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var incident = await _context.Incidents
-                .FirstOrDefaultAsync(m => m.Id == id);
+            var incident = await _context.Incidents.FirstOrDefaultAsync(m => m.Id == id);
             if (incident == null)
             {
                 return NotFound();

@@ -1,13 +1,12 @@
 ﻿using CorePoint.DAL.Enums;
+using CorePoint.DAL.Models;
 using System;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace CorePoint.DAL.Models
+namespace CorePoint.Service.ViewModel
 {
-    public class Incident
+    public class ViewModelIncident
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
         public int SupervisorId { get; set; }
@@ -33,6 +32,5 @@ namespace CorePoint.DAL.Models
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }
         public DateTime UpdateDate { get; set; }
-
     }
 }
