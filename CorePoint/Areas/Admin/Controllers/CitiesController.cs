@@ -111,27 +111,8 @@ namespace CorePoint.Areas.Admin.Controllers
             return View(city);
         }
 
-        // GET: Admin/Cities/Delete/5
+        [Route("Delete")]
         public IActionResult Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var city = _cityServices.GetDetailsById(id);
-            if (city == null)
-            {
-                return NotFound();
-            }
-
-            return View(city);
-        }
-
-        // POST: Admin/Cities/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
         {
             _cityServices.Delete(id);
             return RedirectToAction(nameof(Index));

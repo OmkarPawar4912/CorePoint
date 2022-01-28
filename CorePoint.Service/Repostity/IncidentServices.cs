@@ -10,7 +10,7 @@ namespace CorePoint.Service.Repostity
 {
     public class IncidentServices : IIncidentServices
     {
-        public DateTime date = DateTime.Now;
+        public DateTime date = DateTime.UtcNow;
         private readonly ApplicationContext _context;
         public IncidentServices(ApplicationContext context)
         {
@@ -113,9 +113,26 @@ namespace CorePoint.Service.Repostity
             return joinResult;
         }
 
-        public void Delete(int? id)
+        public IQueryable<ViewModelIncidentStatus> GetSearchResults(ViewModelSearch searchModel)
         {
-            throw new NotImplementedException();
+            var result = GetIncidentIndexList().AsQueryable();
+            if (searchModel != null)
+            {
+                if (!string.IsNullOrEmpty(searchModel.Name))
+                    result = result.Where(x => x.vmEmployeeName.ToLower().Contains(searchModel.Name.ToLower()) || x.vmSupervisorName.ToLower().Contains(searchModel.Name.ToLower()));
+                if (searchModel.FromDate.HasValue)
+                    result = result.Where(x => x.vmIncidentDate >= searchModel.FromDate);
+                if (searchModel.ToDate.HasValue)
+                    result = result.Where(x => x.vmIncidentDate <= searchModel.ToDate);
+            }
+            return result;
+        }
+
+        public void Delete(int id)
+        {
+            var incident = _context.Incidents.Find(id);
+            _context.Incidents.Remove(incident);
+            _context.SaveChanges();
         }
 
         public void Dispose()

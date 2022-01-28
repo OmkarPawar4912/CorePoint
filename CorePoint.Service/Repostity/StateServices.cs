@@ -39,9 +39,16 @@ namespace CorePoint.Service.Repostity
 
         public void EditState(State state)
         {
-            _context.Update(state);
+            var originalData = _context.States.Where(w => w.Id == state.Id).FirstOrDefault();
+            if (originalData != null)
+            {
+                originalData.Name = state.Name;
+            };
+            _context.Update(originalData);
             _context.SaveChanges();
         }
+
+
 
         public void Delete(int? id)
         {

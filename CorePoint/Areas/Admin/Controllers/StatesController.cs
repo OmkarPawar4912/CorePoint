@@ -83,7 +83,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // POST: Admin/States/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, [Bind("Id,Name,CountryId")] State state)
+        public IActionResult Edit(int id, [Bind("Id,Name")] State state)
         {
             if (id != state.Id)
             {
@@ -112,27 +112,8 @@ namespace CorePoint.Areas.Admin.Controllers
             return View(state);
         }
 
-        // GET: Admin/States/Delete/5
+        [ActionName("Delete")]
         public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var state = _stateServices.GetDetailsById(id);
-            if (state == null)
-            {
-                return NotFound();
-            }
-
-            return View(state);
-        }
-
-        // POST: Admin/States/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
         {
             _stateServices.Delete(id);
             return RedirectToAction(nameof(Index));

@@ -25,12 +25,15 @@ namespace CorePoint.DAL.Models
         public string FilePath { get; set; }
         public Servertiy Severity { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Incident Date")]
         public DateTime IncidentDate { get; set; }
         public string CreateBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Reporting Date")]
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime UpdateDate { get; set; }
 
     }

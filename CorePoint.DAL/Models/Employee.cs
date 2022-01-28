@@ -14,6 +14,7 @@ namespace CorePoint.DAL.Models
         [RegularExpression("^([7-9]{1})([0-9]{9})$", ErrorMessage = "Start with 7-9 and Only 10 digit no")]
         public string EmergencyPhoneNumber { get; set; }
         public int Gender { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime DOB { get; set; }
         public int AddressId { get; set; }
         [ForeignKey("AddressId")]
@@ -25,11 +26,14 @@ namespace CorePoint.DAL.Models
         [ForeignKey("CrewId")]
         public Crew Crew { get; set; }
         public bool IsSupervisior { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime HireDate { get; set; }
         public Boolean IsActive { get; set; } = false;
         public string CreateBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime UpdateDate { get; set; }
     }
 }

@@ -14,7 +14,7 @@ namespace CorePoint.Service.ViewModel
         public int vmStatusID { get; set; }
         [Display(Name = "Status")]
         public string vmLateststatus { get; set; }
-        [Display(Name = "Servertiy")]
+        [Display(Name = "Sevearity")]
         public string vmServertiy { get; set; }
         [Display(Name = "Employee")]
         public string vmCrew { get; set; }
@@ -28,6 +28,7 @@ namespace CorePoint.Service.ViewModel
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Incident Date")]
         public DateTime vmIncidentDate { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime vwStatusDate { get; set; }
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "Report Date")]

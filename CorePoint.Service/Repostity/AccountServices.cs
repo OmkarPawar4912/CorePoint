@@ -53,9 +53,9 @@ namespace CorePoint.Service.Repostity
                 IsActive = viewModel.IsActive,
                 IsSupervisior = viewModel.IsSupervisior,
                 Blood = viewModel.Blood,
-                CreateDate = DateTime.Now,
+                CreateDate = DateTime.UtcNow,
                 CreateBy = "Admin",
-                UpdateDate = DateTime.Now,
+                UpdateDate = DateTime.UtcNow,
                 UpdateBy = "Admin"
             };
             return await _userManager.CreateAsync(user, viewModel.ConfirmPassword);

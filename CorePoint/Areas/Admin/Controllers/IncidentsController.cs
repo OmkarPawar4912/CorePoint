@@ -26,8 +26,14 @@ namespace CorePoint.Areas.Admin.Controllers
 
         // GET: Admin/Incidents
         public IActionResult Index()
-        {
+        { 
             return View(_incidentServices.GetIncidentIndexList());
+        }
+
+     [HttpPost]
+        public IActionResult Index(ViewModelSearch viewModel)
+        {
+            return View(_incidentServices.GetSearchResults(viewModel));
         }
 
         // GET: Admin/Incidents/Details/5
@@ -105,5 +111,21 @@ namespace CorePoint.Areas.Admin.Controllers
             return RedirectToAction(nameof(Index));
         }
 
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(int id)
+        {
+            var incident = await _context.Incidents.FindAsync(id);
+            _context.Incidents.Remove(incident);
+            await _context.SaveChangesAsync();
+            return RedirectToAction(nameof(Index));
+        }
+
+        [ActionName("Delete")]
+        public IActionResult Delete(int id)
+        {
+            _incidentServices.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

@@ -25,11 +25,15 @@ namespace CorePoint.Service.ViewModel
         public Boolean IsConfidence { get; set; } = false;
         [Required]
         [Display(Name = "Incident Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime IncidentDate { get; set; }
         public string CreateBy { get; set; }
         [Display(Name = "Reporting Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreateDate { get; set; }
+
         public string UpdateBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime UpdateDate { get; set; }
     }
 }

@@ -14,8 +14,10 @@ namespace CorePoint.DAL.Models
         public string Code { get; set; }
         public string Sitecode { get; set; }
         public string CreateBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime CreateDate { get; set; }
         public string UpdateBy { get; set; }
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime UpdateDate { get; set; }
     }
 }

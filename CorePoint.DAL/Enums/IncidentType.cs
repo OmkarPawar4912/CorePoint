@@ -6,8 +6,8 @@ namespace CorePoint.DAL.Enums
     {
         [Display(Name = "Near Miss")]
         NearMiss = 1,
-        spill,
-        injury,
-        other
+        Spill,
+        Injury,
+        Other
     }
 }

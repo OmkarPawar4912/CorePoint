@@ -3,7 +3,7 @@
     public enum Servertiy
     {
         Low = 1,
-        medium,
-        critical
+        Medium,
+        Critical
     }
 }

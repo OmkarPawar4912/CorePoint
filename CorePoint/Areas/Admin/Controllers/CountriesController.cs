@@ -113,25 +113,6 @@ namespace CorePoint.Areas.Admin.Controllers
         // GET: Admin/Countries/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var country = _countryServices.GetDetailsById(id);
-            if (country == null)
-            {
-                return NotFound();
-            }
-
-            return View(country);
-        }
-
-        // POST: Admin/Countries/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
             _countryServices.Delete(id);
             return RedirectToAction(nameof(Index));
         }
