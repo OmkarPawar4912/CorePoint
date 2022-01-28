@@ -1,91 +1,155 @@
-﻿@model CorePoint.DAL.Models.Incident
-<!-----------------
+﻿@using CorePoint.Service.ViewModel
+@model CorePoint.Service.ViewModel.ViewModelIncidentStatus
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <h6 class="card-title">Edit Incident Status</h6>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Incident Details</h5>
+            <div class="row">
 
-Incident
-
--->
-@{
-    ViewData["Title"] = "Edit";
-}
-<form asp-action="Create">
-    <div class="pagetitle">
-        <div class="card">
-            <div class="card-body-head">
-                <div class="float-left">
-                    <h5 class="card-title">Create Incident</h5>
+                <div class="col-md-2 mt-2">
+                    <strong>@Html.DisplayNameFor(model => model.vmIncidentDate)</strong>
                 </div>
-                <div class="float-right">
+                <div class="col-md-2 mt-2">
+                    @Html.DisplayFor(model => model.vmIncidentDate)
+                </div>
+
+                <div class="col-md-2 mt-2">
+                    <strong>@Html.DisplayNameFor(model => model. vmIncidentReportDate)</strong>
+                </div>
+                <div class="col-md-2 mt-2">
+                    @Html.DisplayFor(model => model. vmIncidentReportDate)
+                </div>
+
+                <div class="col-md-2 mt-2">
+                    <strong>@Html.DisplayNameFor(model => model.vmIncidentType)</strong>
+                </div>
+                <div class="col-md-2 mt-2">
+                    @Html.DisplayFor(model => model.vmIncidentType)
+                </div>
+
+                <div class="col-md-2 mt-2">
+                    <strong>@Html.DisplayNameFor(model => model.vmEmployeeName)</strong>
+                </div>
+                <div class="col-md-2 mt-2">
+                    @Html.DisplayFor(model => model.vmEmployeeName)
+                </div>
+
+                <div class="col-md-2 mt-2">
+                    <strong> @Html.DisplayNameFor(model => model.vmSupervisorName) </strong>
+                </div>
+                <div class="col-md-2 mt-2">
+                    @Html.DisplayFor(model => model.vmSupervisorName)
+                </div>
+
+                <div class="col-md-2 mt-2">
+                    <strong> @Html.DisplayNameFor(model => model.vmArea) </strong>
+                </div>
+                <div class="col-md-2 mt-2">
+                    @Html.DisplayFor(model => model.vmArea)
+                </div>
+
+                <div class="col-md-2 mt-2">
+                    <strong> @Html.DisplayNameFor(model => model.viewIncidentDes) </strong>
+                </div>
+                <div class="col-md-2 mt-2">
+                    @Html.DisplayFor(model => model.viewIncidentDes)
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="section">
+    <div class="row">
+        <div class="col-lg-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Edit Incident</h5>
+
+                    <!-- General Form Elements -->
+                    <form asp-action="Edit">
+                        <div class="row mb-3">
+                            <input type="hidden" asp-for="vmIncidentId" />
+                            <label asp-for="vmStatusID" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                @Html.DropDownListFor(Model => Model.vmStatusID, new SelectList(ViewBag.StatusList, "ID", "Name"),
+                                "-- Select Status --", new { id = "ddlStatus", @class="form-control"})
+                                <span asp-validation-for="vmStatusID" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label asp-for="Remark" class="col-sm-2 col-form-label"></label>
+                            <div class="col-sm-10">
+                                <textarea asp-for="Remark" class="form-control"></textarea>
+                                <span asp-validation-for="Remark" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-sm-8">
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="submit" value="Save" class="btn btn-primary" />
+                           
+                                <a asp-action="Index" class="btn btn-secondary " > Back </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Incident Status</h5>
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Status</th>
+                                <th scope="col">Remark</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                int num = 1;
+                                foreach (var status in ViewBag.Data)
+                                {
+                                    <tr>
+                                        <th scope="row">@num</th>
+                                        <td>@status.vwStatusDate</td>
+                                        <td>@status.vmLateststatus</td>
+                                        <td>@status.Remark</td>
+                                    </tr>
+                                    num++;
+                                }
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
     </div>
+</section>
 
-    <section class="section">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="card">
-                    <div class="card-body m-3">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group mb-2">
-                                    <input type="hidden" asp-for="Id" />
-                                    <div class="form-group">
-                                        <label asp-for="EmailId" class="control-label"></label>
-                                        <input asp-for="EmailId" class="form-control" />
-                                        <span asp-validation-for="EmailId" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="SupervisorUserName" class="control-label"></label>
-                                        <input asp-for="SupervisorUserName" class="form-control" />
-                                        <span asp-validation-for="SupervisorUserName" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Shift" class="control-label"></label>
-                                        <select asp-for="Shift" class="form-control"></select>
-                                        <span asp-validation-for="Shift" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="IncidentType" class="control-label"></label>
-                                        <input asp-for="IncidentType" class="form-control" />
-                                        <span asp-validation-for="IncidentType" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Area" class="control-label"></label>
-                                        <input asp-for="Area" class="form-control" />
-                                        <span asp-validation-for="Area" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Description" class="control-label"></label>
-                                        <input asp-for="Description" class="form-control" />
-                                        <span asp-validation-for="Description" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="FilePath" class="control-label"></label>
-                                        <input asp-for="FilePath" class="form-control" />
-                                        <span asp-validation-for="FilePath" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="Severity" class="control-label"></label>
-                                        <select asp-for="Severity" class="form-control"></select>
-                                        <span asp-validation-for="Severity" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <label asp-for="IncidentDate" class="control-label"></label>
-                                        <input asp-for="IncidentDate" class="form-control" />
-                                        <span asp-validation-for="IncidentDate" class="text-danger"></span>
-                                    </div>
-                                    <div class="form-group">
-                                        <input type="submit" value="Save" class="btn btn-primary" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<section class="section">
+    <div class="card">
+        <div class="card-body">
         </div>
-    </section>
-</form>
+    </div>
+
+</section>
 @section Scripts {
     @{
     await Html.RenderPartialAsync("_ValidationScriptsPartial");

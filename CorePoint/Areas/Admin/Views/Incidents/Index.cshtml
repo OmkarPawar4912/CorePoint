@@ -22,6 +22,9 @@
                         <thead>
                             <tr>
                                 <th>
+                                    Action
+                                </th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.vmId)
                                 </th>
                                 <th>
@@ -31,15 +34,18 @@
                                     @Html.DisplayNameFor(model => model.vmIncidentType)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.vmIncidentType)                               
+                                    @Html.DisplayNameFor(model => model.vmEmployeeName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.vmSupervisorName)
                                 </th>
                                 <th>
                                     @Html.DisplayNameFor(model => model.vmServertiy)
                                 </th>
-                               <th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.vmIncidentDate)
                                 </th>
-                                 <th>
+                                <th>
                                     @Html.DisplayNameFor(model => model.vmIncidentReportDate)
                                 </th>
                             </tr>
@@ -48,27 +54,37 @@
                             @foreach (var item in Model)
                             {
                                 <tr>
-                                  <td>
-                                    @Html.DisplayFor(model => @item.vmId)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => @item.vmLateststatus)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => @item.vmIncidentType)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => @item.vmIncidentType)                               
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(model => @item.vmServertiy)
-                                </td>
-                               <td>
-                                    @Html.DisplayFor(model => @item.vmIncidentDate)
-                                </td>
-                                 <td>
-                                    @Html.DisplayFor(model => @item.vmIncidentReportDate)
-                                </td>
+                                    <td>
+                                      
+                                        <a asp-action="Edit" asp-area="Admin" asp-controller="Incidents" asp-route-id="@item.vmId" ><i class="bi bi-pencil-fill"></i></a>
+                                        <a asp-action="View" ><i class="bi bi-eye-fill"></i></a>
+                                        <a src="" ><i class="bi bi-file-earmark-font-fill"></i></a>
+                                        <a asp-action="Delete" ><i class="bi bi-trash-fill"></i></a>
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmId)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmLateststatus)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmIncidentType)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmEmployeeName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmSupervisorName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmServertiy)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmIncidentDate)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(model => @item.vmIncidentReportDate)
+                                    </td>
                                 </tr>
                             }
                         </tbody>

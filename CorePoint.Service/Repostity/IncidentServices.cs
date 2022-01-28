@@ -10,15 +10,24 @@ namespace CorePoint.Service.Repostity
 {
     public class IncidentServices : IIncidentServices
     {
+        public DateTime date = DateTime.Now;
         private readonly ApplicationContext _context;
         public IncidentServices(ApplicationContext context)
         {
             _context = context;
         }
+
+        //Status Dropdown
+        public IList<StatusType> StatusdlList()
+        {
+            return _context.StatusTypes.ToList();
+        }
+
         public void CreateIncident(Incident incident)
         {
-            incident.CreateDate = DateTime.Now;
-            incident.UpdateDate = DateTime.Now;
+
+            incident.CreateDate = date;
+            incident.UpdateDate = date;
             incident.CreateBy = "Admin";
             incident.UpdateBy = "Admin";
             _context.Add(incident);
@@ -31,13 +40,29 @@ namespace CorePoint.Service.Repostity
             {
                 IncidentID = incident.Id,
                 StatusID = 1,
-                CreateDate = DateTime.Now,
-                CreateBy = "Admin"
+                CreateDate = date,
+                CreateBy = "Admin",
+                Remark = "Initiated"
             };
             _context.IncidentStatuses.Add(status);
             _context.SaveChanges();
         }
-        public List<ViewModelIncidentStatus> GetAllCases()
+
+        public void ChangeIncidentStatus(ViewModelIncidentStatus viewModel)
+        {
+            IncidentStatus status = new IncidentStatus()
+            {
+                IncidentID = viewModel.vmIncidentId,
+                StatusID = viewModel.vmStatusID,
+                CreateBy = "Admin",
+                CreateDate = date,
+                Remark = viewModel.Remark
+            };
+            _context.IncidentStatuses.Add(status);
+            _context.SaveChanges();
+        }
+
+        public List<ViewModelIncidentStatus> GetIncidentIndexList()
         {
             var result = (from a in _context.Incidents
                           let sample = _context.IncidentStatuses.Where(x => x.IncidentID == a.Id).OrderByDescending(c => c.CreateDate).FirstOrDefault()
@@ -49,10 +74,43 @@ namespace CorePoint.Service.Repostity
                               vmIncidentReportDate = a.CreateDate,
                               vmLateststatus = sample.StatusType.Name,
                               vmServertiy = a.Severity.ToString(),
-                              vmSupervisorName = a.SupervisorUserName,
-                              vmCrewEmail = a.EmailId
-                          }).ToList();
+                              vmSupervisorName = _context.Employees.Where(x => x.Email == a.SupervisorUserName).FirstOrDefault().FullName,
+                              vmEmployeeName = _context.Employees.Where(x => x.Email == a.EmailId).FirstOrDefault().FullName,
+                              vmCrew = a.EmailId
+                          }).OrderByDescending(x => x.vmId).ToList();
             return result;
+        }
+
+        public List<ViewModelIncidentStatus> GetListById(int? id)
+        {
+            var joinResult = (from t1 in _context.Incidents.Where(w => w.Id == id)
+                              join t2 in _context.IncidentStatuses
+                              on t1.Id equals t2.IncidentID
+                              select new ViewModelIncidentStatus
+                              {
+                                  vmLateststatus = _context.StatusTypes.Where(x => x.ID == t2.StatusID).FirstOrDefault().Name,
+                                  vwStatusDate = t2.CreateDate,
+                                  Remark = t2.Remark,
+                              }).OrderByDescending(d => d.vwStatusDate).ToList();
+
+            return joinResult;
+        }
+
+        public ViewModelIncidentStatus DisplayStatusById(int id)
+        {
+            var joinResult = (from t1 in _context.Incidents.Where(w => w.Id == id)
+                              select new ViewModelIncidentStatus
+                              {
+                                  vmIncidentId = t1.Id,
+                                  vmIncidentDate = t1.IncidentDate,
+                                  vmIncidentType = t1.IncidentType,
+                                  vmIncidentReportDate = t1.CreateDate,
+                                  vmArea = t1.Area,
+                                  vmSupervisorName = _context.Employees.Where(x => x.Email == t1.SupervisorUserName).FirstOrDefault().FullName,
+                                  vmEmployeeName = _context.Employees.Where(x => x.Email == t1.EmailId).FirstOrDefault().FullName,
+                                  viewIncidentDes = t1.Description
+                              }).FirstOrDefault();
+            return joinResult;
         }
 
         public void Delete(int? id)
@@ -62,7 +120,8 @@ namespace CorePoint.Service.Repostity
 
         public void Dispose()
         {
-            throw new NotImplementedException();
+            _context.Dispose();
+            GC.SuppressFinalize(this);
         }
 
         public void EditCrew(Incident incident)

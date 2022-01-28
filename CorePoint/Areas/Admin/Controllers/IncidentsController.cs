@@ -1,6 +1,7 @@
 ﻿using CorePoint.DAL.Data;
 using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
+using CorePoint.Service.ViewModel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -26,7 +27,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // GET: Admin/Incidents
         public IActionResult Index()
         {
-            return View(_incidentServices.GetAllCases());
+            return View(_incidentServices.GetIncidentIndexList());
         }
 
         // GET: Admin/Incidents/Details/5
@@ -79,9 +80,29 @@ namespace CorePoint.Areas.Admin.Controllers
         }
 
         // GET: Admin/Incidents/Edit/1
-        public IActionResult Edit(int id)
+        public IActionResult Edit(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            ViewBag.StatusList = _incidentServices.StatusdlList();
+            ViewBag.Data = _incidentServices.GetListById(id);
+            
+            if (ViewBag.Data == null)
+            {
+                return NotFound();
+            }
+
+            return View(_incidentServices.DisplayStatusById((int)id));
+        }
+
+        [HttpPost]
+        public IActionResult Edit([Bind("vmIncidentId,vmStatusID,Remark")]ViewModelIncidentStatus viewModel)
+        {
+            _incidentServices.ChangeIncidentStatus(viewModel);
+            return RedirectToAction(nameof(Index));
         }
 
     }

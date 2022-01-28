@@ -15,6 +15,7 @@ namespace CorePoint.DAL.Models
         [ForeignKey("Incident")]
         public int IncidentID { get; set; }
         public Incident Incident { get; set; }
+        public string Remark { get; set; }
         public string CreateBy { get; set; }
         public DateTime CreateDate { get; set; }
 

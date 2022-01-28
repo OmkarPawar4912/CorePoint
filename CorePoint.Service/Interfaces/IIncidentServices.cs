@@ -11,6 +11,10 @@ namespace CorePoint.Service.Interfaces
         void Delete(int? id);
         void Dispose();
         void EditCrew(Incident incident);
-        List<ViewModelIncidentStatus> GetAllCases();
+        List<ViewModelIncidentStatus> GetIncidentIndexList();
+        IList<StatusType> StatusdlList();
+        List<ViewModelIncidentStatus> GetListById(int? id);
+        ViewModelIncidentStatus DisplayStatusById(int id);
+        void ChangeIncidentStatus(ViewModelIncidentStatus viewModel);
     }
 }
