@@ -90,7 +90,6 @@
                                     <td>
 
                                         <a asp-action="Edit" asp-area="Admin" asp-controller="Incidents" asp-route-id="@item.vmId"><i class="bi bi-pencil-fill"></i></a>
-                                        <a src=""><i class="bi bi-file-earmark-font-fill"></i></a>
                                         <a href="@Url.Action("Delete", new { id = item.vmId })" onclick="return confirm ('Are you sure want to delete ?');"><i class="bi bi-trash-fill"></i></a>
                                     </td>
                                     <td>

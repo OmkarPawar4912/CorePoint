@@ -97,7 +97,7 @@ namespace CorePoint.Service.Repostity
             {
                 new SelectListItem
                 {
-                    Text = "-- Select Shift --",
+                    Text = "-- Select Sevearity --",
                     Value = ""
                 }
             };

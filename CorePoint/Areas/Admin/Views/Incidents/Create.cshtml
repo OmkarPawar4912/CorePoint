@@ -4,7 +4,7 @@
         <div class="card">
             <div class="card-body-head">
                 <div class="float-left">
-                    <h5 class="card-title">Edit Incident</h5>
+                    <h5 class="card-title">Create Incident</h5>
                 </div>
                 <div class="float-right">
                 </div>
@@ -50,26 +50,19 @@
                                     <select asp-for="Shift" class="form-control" asp-items="ViewBag.ShiftList"></select>
                                     <span asp-validation-for="Shift" class="text-danger"></span>
                                 </div>
-                                <div class="form-group mb-2">
-                                    <label asp-for="FilePath" class="control-label"></label>
-                                    <input asp-for="FilePath" class="form-control" />
-                                    <span asp-validation-for="FilePath" class="text-danger"></span>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                      <div class="form-group mb-2">
+                                  <div class="form-group mb-2">
                                     <label asp-for="IncidentDate" class="control-label"></label>
                                     <input asp-for="IncidentDate" class="form-control" />
                                     <span asp-validation-for="IncidentDate" class="text-danger"></span>
                                 </div>
-
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label asp-for="Area" class="control-label"></label>
                                     <input asp-for="Area" class="form-control" />
                                     <span asp-validation-for="Area" class="text-danger"></span>
                                 </div>
-                            </div>
-                            <div class="col-md-6">
+                           
                                 <div class="form-group mb-2">
                                     <label asp-for="Description" class="control-label"></label>
                                     <textarea asp-for="Description" class="form-control" ></textarea>
@@ -77,12 +70,12 @@
                                 </div>
                           
                             </div>
-                            <div class="col-md-6">
-                                <div class="form-group mb-2">
-                                    <input type="submit" value="Create" class="btn btn-primary m-4" />
+                            <div class="col-md-6">                               
+                                <div class="form-group">
+                                    <input type="submit" value="Create" class="btn btn-primary" />
                                     <a asp-action="Index" class="btn btn-secondary">Back</a>
                                 </div>
-                            </div>
+                            </>
                         </div>
                     </div>
                 </div>

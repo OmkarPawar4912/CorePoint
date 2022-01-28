@@ -2,6 +2,7 @@
 using CorePoint.DAL.Models;
 using CorePoint.Service.Interfaces;
 using CorePoint.Service.ViewModel;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 namespace CorePoint.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = "Admin")]
     public class IncidentsController : Controller
     {
         private readonly IEmployeeServices _employeeServices;
@@ -71,7 +73,7 @@ namespace CorePoint.Areas.Admin.Controllers
         // POST: Admin/Incidents/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create([Bind("Id,SupervisorUserName,EmailId,Shift,IncidentType,Area,Description,FilePath,Severity,IncidentDate")] Incident incident)
+        public IActionResult Create([Bind("Id,SupervisorUserName,EmailId,Shift,IncidentType,Area,Description,Severity,IncidentDate")] Incident incident)
         {
             if (ModelState.IsValid)
             {

@@ -140,15 +140,5 @@ namespace CorePoint.Service.Repostity
             _context.Dispose();
             GC.SuppressFinalize(this);
         }
-
-        public void EditCrew(Incident incident)
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool IncidentExists(int id)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

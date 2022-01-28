@@ -21,8 +21,7 @@ namespace CorePoint.DAL.Models
         public string IncidentType { get; set; }
         public string Area { get; set; }
         public string Description { get; set; }
-        [Display(Name = "Uploade File")]
-        public string FilePath { get; set; }
+        [Display(Name = "Sevearity")]
         public Servertiy Severity { get; set; }
         [Required]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
