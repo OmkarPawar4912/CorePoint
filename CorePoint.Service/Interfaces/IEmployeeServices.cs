@@ -13,5 +13,6 @@ namespace CorePoint.Service.Interfaces
         IEnumerable<ViewModelEmployee> GetddlSupervisorList();
         List<SelectListItem> GetddlSeverityList();
         List<SelectListItem> GetddlIncidentList();
+        void Delete(string id);
     }
 }

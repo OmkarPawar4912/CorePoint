@@ -11,11 +11,9 @@ namespace CorePoint.Service.Repostity
 {
     public class EmployeeServices : IEmployeeServices
     {
-        private readonly IAddressServices _addressServices;
         private readonly ApplicationContext _context;
-        public EmployeeServices(IAddressServices addressServices, ApplicationContext context)
+        public EmployeeServices(ApplicationContext context)
         {
-            _addressServices = addressServices;
             _context = context;
         }
 
@@ -116,6 +114,13 @@ namespace CorePoint.Service.Repostity
         {
             _context.Dispose();
             GC.SuppressFinalize(this);
+        }
+
+        public void Delete(string id)
+        {
+            var employee = _context.Employees.Find(id);
+            _context.Employees.Remove(employee);
+            _context.SaveChanges();
         }
     }
 }

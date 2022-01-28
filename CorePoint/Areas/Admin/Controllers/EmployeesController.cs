@@ -64,6 +64,12 @@ namespace CorePoint.Areas.Admin.Controllers
             return View();
         }
 
+        public IActionResult Delete(string id)
+        {
+            _employeeServices.Delete(id);
+            return RedirectToAction(nameof(Index));
+        }
+
         //POST: Admin/Employees/Create 
         [HttpPost]
         [ValidateAntiForgeryToken]
