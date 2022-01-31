@@ -6,7 +6,7 @@ namespace CorePoint.Service.ViewModel
 {
     public class ViewModelIncidentStatus
     {
-        [Display(Name ="Id")]
+        [Display(Name = "Id")]
         public int vmId { get; set; }
         [Display(Name = "Incident ID")]
         public int vmIncidentId { get; set; }
@@ -22,6 +22,7 @@ namespace CorePoint.Service.ViewModel
         [Display(Name = "Supervisor Name")]
         public string vmSupervisorName { get; set; }
         [Display(Name = "Employee Name")]
+        public string vmFile { get; set; }
         public string vmEmployeeName { get; set; }
         [Display(Name = "Type")]
         public string vmIncidentType { get; set; }

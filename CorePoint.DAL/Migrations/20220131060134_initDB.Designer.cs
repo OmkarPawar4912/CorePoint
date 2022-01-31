@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CorePoint.DAL.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20220128021132_addRemark")]
-    partial class addRemark
+    [Migration("20220131060134_initDB")]
+    partial class initDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -228,7 +228,7 @@ namespace CorePoint.DAL.Migrations
                     b.Property<string>("EmailId")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("FilePath")
+                    b.Property<string>("FileUploadePath")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("IncidentDate")
@@ -684,16 +684,16 @@ namespace CorePoint.DAL.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "8798dad3-b49b-42a2-9fb3-f8ccbe75fea5",
+                            ConcurrencyStamp = "8d45b8d1-0842-413b-91af-08d20b5e1649",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@GMAIL.COM",
                             NormalizedUserName = "ADMIN@GMAIL.COM",
-                            PasswordHash = "AQAAAAEAACcQAAAAEFFOtnhMZgM+K8IogXzjihzwMcwtBPNocg/KiCk3eiQvHO2CR3u0p6pYjrnJA3l+kQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKPeTlxDwyh0z1x6kOCoEXMUcR8s/t1EqI0fVwgl266VrYbVRWKpWWSHpFgtUz0yog==",
                             PhoneNumber = "1234567890",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "45931335-21ca-4307-bec6-d3a7df5f60a1",
+                            SecurityStamp = "fd8b0bf9-be87-4c4c-9f39-74e5543237a2",
                             TwoFactorEnabled = false,
                             UserName = "admin@gmail.com",
                             AddressId = 1,

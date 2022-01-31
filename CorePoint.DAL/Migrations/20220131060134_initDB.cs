@@ -3,7 +3,7 @@ using System;
 
 namespace CorePoint.DAL.Migrations
 {
-    public partial class seedInitiated : Migration
+    public partial class initDB : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -77,9 +77,9 @@ namespace CorePoint.DAL.Migrations
                     SupervisorUserName = table.Column<string>(nullable: true),
                     Shift = table.Column<int>(nullable: false),
                     IncidentType = table.Column<string>(nullable: false),
+                    FileUploadePath = table.Column<string>(nullable: true),
                     Area = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    FilePath = table.Column<string>(nullable: true),
                     Severity = table.Column<int>(nullable: false),
                     IncidentDate = table.Column<DateTime>(nullable: false),
                     CreateBy = table.Column<string>(nullable: true),
@@ -183,6 +183,7 @@ namespace CorePoint.DAL.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StatusID = table.Column<int>(nullable: false),
                     IncidentID = table.Column<int>(nullable: false),
+                    Remark = table.Column<string>(nullable: true),
                     CreateBy = table.Column<string>(nullable: true),
                     CreateDate = table.Column<DateTime>(nullable: false)
                 },
@@ -413,7 +414,7 @@ namespace CorePoint.DAL.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Discriminator", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName", "AddressId", "Blood", "CreateBy", "CreateDate", "CrewId", "DOB", "EmergencyPhoneNumber", "FullName", "Gender", "HireDate", "IsActive", "IsSupervisior", "UpdateBy", "UpdateDate" },
-                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "251d9489-20ad-4e51-b5a6-aa31d4443230", "Employee", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEGxjhzt+PdYkEdiHBnL9VsCQStdWNNdBUBq6e3k0H/lDs48kdWwNqN1MDXP0He+lvg==", "1234567890", false, "a6fe0962-e0b7-4bb0-8f79-3b363bb48b31", false, "admin@gmail.com", 1, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
+                values: new object[] { "b74ddd14-6340-4840-95c2-db12554843e5", 0, "8d45b8d1-0842-413b-91af-08d20b5e1649", "Employee", "admin@gmail.com", false, false, null, "ADMIN@GMAIL.COM", "ADMIN@GMAIL.COM", "AQAAAAEAACcQAAAAEKPeTlxDwyh0z1x6kOCoEXMUcR8s/t1EqI0fVwgl266VrYbVRWKpWWSHpFgtUz0yog==", "1234567890", false, "fd8b0bf9-be87-4c4c-9f39-74e5543237a2", false, "admin@gmail.com", 1, 0, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), 1, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), null, null, 0, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), false, false, null, new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified) });
 
             migrationBuilder.InsertData(
                 table: "AspNetUserRoles",

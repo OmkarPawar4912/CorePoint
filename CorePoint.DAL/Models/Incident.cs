@@ -19,6 +19,8 @@ namespace CorePoint.DAL.Models
         [Required]
         [Display(Name = "Incident Type")]
         public string IncidentType { get; set; }
+        public string FileUploadePath { get; set; }
+        //  public IFormFile FileUploade { get; set; }
         public string Area { get; set; }
         public string Description { get; set; }
         [Display(Name = "Sevearity")]

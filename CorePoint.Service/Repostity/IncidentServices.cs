@@ -73,6 +73,7 @@ namespace CorePoint.Service.Repostity
                               vmIncidentType = a.IncidentType,
                               vmIncidentReportDate = a.CreateDate,
                               vmLateststatus = sample.StatusType.Name,
+                              vmFile = a.FileUploadePath,
                               vmServertiy = a.Severity.ToString(),
                               vmSupervisorName = _context.Employees.Where(x => x.Email == a.SupervisorUserName).FirstOrDefault().FullName,
                               vmEmployeeName = _context.Employees.Where(x => x.Email == a.EmailId).FirstOrDefault().FullName,
@@ -106,6 +107,7 @@ namespace CorePoint.Service.Repostity
                                   vmIncidentType = t1.IncidentType,
                                   vmIncidentReportDate = t1.CreateDate,
                                   vmArea = t1.Area,
+                                  vmFile = t1.FileUploadePath,
                                   vmSupervisorName = _context.Employees.Where(x => x.Email == t1.SupervisorUserName).FirstOrDefault().FullName,
                                   vmEmployeeName = _context.Employees.Where(x => x.Email == t1.EmailId).FirstOrDefault().FullName,
                                   viewIncidentDes = t1.Description

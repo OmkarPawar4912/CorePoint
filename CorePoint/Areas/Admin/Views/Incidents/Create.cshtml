@@ -1,5 +1,5 @@
-﻿@model CorePoint.DAL.Models.Incident
-<form asp-action="Create">
+﻿@model CorePoint.Service.ViewModel.ViewModelIncident
+<form asp-action="Create" enctype="multipart/form-data">
     <div class="pagetitle">
         <div class="card">
             <div class="card-body-head">
@@ -21,12 +21,12 @@
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label asp-for="Severity" class="control-label"></label>
-                                    <select asp-for="Severity" class="form-control" asp-items="ViewBag.SeverityList"></select>
+                                    <select asp-for="Severity" tabindex="1" class="form-control" asp-items="ViewBag.SeverityList"></select>
                                     <span asp-validation-for="Severity" class="text-danger"></span>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label asp-for="IncidentType" class="control-label"></label>
-                                    <select asp-for="IncidentType" class="form-control" asp-items="ViewBag.IncidentList"></select>
+                                    <select asp-for="IncidentType" class="form-control" tabindex="3" asp-items="ViewBag.IncidentList"></select>
                                     <span asp-validation-for="IncidentType" class="text-danger"></span>
                                 </div>
                             </div>
@@ -34,48 +34,57 @@
                                 <div class="form-group mb-2">
                                     <label asp-for="SupervisorUserName" class="control-label"></label>
                                     @Html.DropDownListFor(Model => Model.SupervisorUserName, new SelectList(ViewBag.SupervisorList, "Email", "FullName"),
-                                    "-- Select Supervisor --", new { id = "ddlSupervisor", @class="form-control"})
+                                    "-- Select Supervisor --", new { id = "ddlSupervisor",tabindex="2" , @class="form-control"})
                                     <span asp-validation-for="SupervisorUserName" class="text-danger"></span>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label asp-for="EmailId" class="control-label"></label>
                                     @Html.DropDownListFor(Model => Model.EmailId, new SelectList(ViewBag.EmpList, "Email", "FullName"),
-                                    "-- Select Employee --", new { id = "ddlEmployee", @class="form-control"})
+                                    "-- Select Employee --", new { id = "ddlEmployee",tabindex="4" , @class="form-control"})
                                     <span asp-validation-for="EmailId" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label asp-for="Shift" class="control-label"></label>
-                                    <select asp-for="Shift" class="form-control" asp-items="ViewBag.ShiftList"></select>
+                                    <select asp-for="Shift" class="form-control" tabindex="5" asp-items="ViewBag.ShiftList"></select>
                                     <span asp-validation-for="Shift" class="text-danger"></span>
                                 </div>
-                                  <div class="form-group mb-2">
+                                <div class="form-group mb-2">
                                     <label asp-for="IncidentDate" class="control-label"></label>
-                                    <input asp-for="IncidentDate" class="form-control" />
+                                    <input asp-for="IncidentDate" tabindex="7" class="form-control" />
                                     <span asp-validation-for="IncidentDate" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label asp-for="Area" class="control-label"></label>
-                                    <input asp-for="Area" class="form-control" />
+                                    <input asp-for="Area" tabindex="6" class="form-control" />
                                     <span asp-validation-for="Area" class="text-danger"></span>
                                 </div>
-                           
+
+                                <div class="form-group mb-2">
+                                    <label asp-for="FileUploade" class="control-label"></label>
+                                    <input asp-for="FileUploade" id="txtUploade" tabindex="8" class="form-control" accept="application/pdf" />
+                                    <span asp-validation-for="FileUploade" class="text-danger"></span>
+                                </div>
+
+                            </div>
+                            <div class="col-md-6">
                                 <div class="form-group mb-2">
                                     <label asp-for="Description" class="control-label"></label>
-                                    <textarea asp-for="Description" class="form-control" ></textarea>
+                                    <textarea asp-for="Description" tabindex="9" class="form-control"></textarea>
                                     <span asp-validation-for="Description" class="text-danger"></span>
                                 </div>
-                          
                             </div>
-                            <div class="col-md-6">                               
+
+                            <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="submit" value="Create" class="btn btn-primary" />
-                                    <a asp-action="Index" class="btn btn-secondary">Back</a>
+                                    <input type="submit" value="Create" tabindex="10" class="btn btn-primary" />
+                                    <a asp-action="Index" tabindex="11" class="btn btn-secondary">Back</a>
                                 </div>
-                            </>
+                                </>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -83,3 +92,16 @@
         </div>
     </section>
 </form>
+<script>
+
+    $('#txtUploade').on('change', function() {
+       myfile= $(this).val();
+       var ext = myfile.split('.').pop();
+       if(ext.toLowerCase()!="pdf"){
+            event.target.value = '';
+          alert("Please select pdf file");
+       } else{
+           true;
+       }
+    });
+</script>

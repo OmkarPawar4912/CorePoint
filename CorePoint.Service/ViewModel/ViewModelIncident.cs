@@ -1,4 +1,5 @@
 ﻿using CorePoint.DAL.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -7,10 +8,9 @@ namespace CorePoint.Service.ViewModel
     public class ViewModelIncident
     {
         public int Id { get; set; }
-        [Required]
-        public int SupervisorId { get; set; }
-        [Required]
-        public int CrewId { get; set; }
+        [Display(Name = "Supervisor")]
+        public string SupervisorUserName { get; set; }
+        public string EmailId { get; set; }
         [Required]
         [Display(Name = "Shift")]
         public Shift Shift { get; set; }
@@ -19,8 +19,8 @@ namespace CorePoint.Service.ViewModel
         public string IncidentType { get; set; }
         public string Area { get; set; }
         public string Description { get; set; }
-        [Display(Name = "Uploade File")]
-        public string FilePath { get; set; }
+        public string FileUploadePath { get; set; }
+        public IFormFile FileUploade { get; set; }
         public Servertiy Severity { get; set; }
         public Boolean IsConfidence { get; set; } = false;
         [Required]
